@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кто ты по имени?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>Кто ты по имени????</h1>
+
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="Введите имя"
+        >
+
+        <button id="checkButton">
+            ПРОВЕРИТЬ
+        </button>
+
+        <button id="pigButton">
+            Картинка свинки (бонус)
+        </button>
+    </main>
+    <div id="resultModal" class="modal">
+    <div class="modalContent">
+
+        <button id="closeModal" class="closeButton">×</button>
+
+        <div class="resultImages">
+            <img id="resultImage" src="" alt="Результат">
+            <img id="resultImage2" src="" alt="Результат">
+</div>
+
+        <p id="resultText"></p>
+
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url("images/pigs.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    font-family: ''Iosevka Charon Mono'', monospace;
+}
+
+.container {
+    min-height: 100vh;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 60px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 70px;
+}
+
+#nameInput {
+    width: 330px;
+    height: 80px;
+
+    padding: 0 20px;
+
+    border: none;
+    outline: none;
+
+    background: white;
+    font-size: 28px;
+}
+
+#nameInput::placeholder {
+    color: #333;
+}
+
+#checkButton {
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 100px;
+    height: 500px;
+
+    border: none;
+    background: white;
+
+    font-size: 28px;
+    font-weight: normal;
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+
+    cursor: pointer;
+}
+
+#pigButton {
+    position: absolute;
+
+    right: 25px;
+    bottom: 30px;
+
+    width: 190px;
+    min-height: 100px;
+
+    padding: 15px 20px;
+
+    border: none;
+    background: white;
+
+    font-size: 18px;
+    line-height: 1.2;
+
+    cursor: pointer;
+}
+min-width: 768px {
+
+    #checkButton {
+        width: 140px;
+        height: 650px;
+
+        font-size: 36px;
+    }
+
+    #pigButton {
+        width: 260px;
+        min-height: 130px;
+
+        right: 40px;
+        bottom: 40px;
+
+        font-size: 24px;
+    }
+
+}
+@media screen and (min-width: 768px) {
+    #checkButton {
+        width: 180px !important;
+        height: 750px !important;
+        font-size: 42px !important;
+    }
+
+    #pigButton {
+        width: 300px !important;
+        min-height: 160px !important;
+        right: 50px !important;
+        bottom: 50px !important;
+        font-size: 28px !important;
+    }
+}
+/* Окно результата */
+
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: transparent;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.modalContent {
+    position: relative;
+
+    width: min(90vw, 700px);
+
+    text-align: center;
+}
+
+.modalContent img {
+    display: block;
+
+    width: 100%;
+    max-height: 85vh;
+
+    object-fit: contain;
+}
+
+#resultText {
+    position: absolute;
+
+    top: 20px;
+    left: 0;
+    right: 0;
+
+    margin: 0;
+
+    color: red;
+
+    font-size: clamp(28px, 5vw, 60px);
+    font-weight: normal;
+
+    z-index: 2;
+}
+
+.closeButton {
+    position: absolute;
+
+    top: -50px;
+    right: 0;
+
+    border: none;
+    background: transparent;
+
+    color: white;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    z-index: 3;
+}
+.resultImages {
+    display: flex;
+    width: 100%;
+}
+
+.resultImages img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: cover;
+}
+
+#resultImage2 {
+    display: none;
+}
+.resultImages {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+}
+
+.resultImages img {
+    width: 50%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+}
+.resultImages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultImages img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
