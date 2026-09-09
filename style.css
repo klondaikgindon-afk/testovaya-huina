@@ -253,52 +253,75 @@ h1 {
     .container {
         padding-top: 35px;
         min-height: 100vh;
+        position: relative;
     }
 
     h1 {
         width: 90%;
         font-size: 28px;
         margin-bottom: 40px;
+        text-align: center;
     }
 
     #nameInput {
         width: 75%;
         max-width: 330px;
         height: 70px;
-
         font-size: 24px;
     }
 
+    /* ПРОВЕРИТЬ — слева */
+
     #checkButton {
-        width: 70px;
-        height: 300px;
+        position: absolute;
+
+        left: 0;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        width: 60px;
+        height: 260px;
 
         font-size: 22px;
+
+        writing-mode: vertical-rl;
+        text-orientation: upright;
     }
 
+    /* TELEGRAM — не залезает на ПРОВЕРИТЬ */
+
     #telegramButton {
-        width: 85%;
+        width: calc(100% - 110px);
 
         margin-top: 25px;
+        margin-left: 90px;
+        margin-right: 20px;
 
-        padding: 18px 20px;
+        padding: 18px 10px;
 
         font-size: 20px;
         border-radius: 14px;
     }
 
-    #secondButton {
-        position: static;
+    /* СВИНКА — справа снизу */
 
-        width: 85%;
+    #secondButton {
+        position: absolute;
+
+        right: 15px;
+        bottom: 20px;
+
+        width: 150px;
         min-height: 80px;
 
-        margin-top: 25px;
+        padding: 12px 10px;
 
-        padding: 15px 20px;
-
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 1.2;
     }
+
+    /* ОКНО РЕЗУЛЬТАТА */
 
     .modalContent {
         width: 90vw;
