@@ -10,7 +10,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: repeat;
-    font-family: ''Iosevka Charon Mono'', monospace;
+    font-family: "Iosevka Charon Mono", monospace;
 }
 
 .container {
@@ -27,6 +27,7 @@ body {
 h1 {
     font-size: 32px;
     margin-bottom: 70px;
+    text-align: center;
 }
 
 #nameInput {
@@ -45,6 +46,8 @@ h1 {
 #nameInput::placeholder {
     color: #333;
 }
+
+/* КНОПКА ПРОВЕРИТЬ */
 
 #checkButton {
     position: absolute;
@@ -68,6 +71,8 @@ h1 {
     cursor: pointer;
 }
 
+/* КНОПКА СВИНКИ */
+
 #secondButton {
     position: absolute;
 
@@ -87,49 +92,42 @@ h1 {
 
     cursor: pointer;
 }
-min-width: 768px {
 
-    #checkButton {
-        width: 140px;
-        height: 650px;
+/* TELEGRAM */
 
-        font-size: 36px;
-    }
+#telegramButton {
+    display: block;
 
-    #pigButton {
-        width: 260px;
-        min-height: 130px;
+    margin: 30px auto 0;
 
-        right: 40px;
-        bottom: 40px;
+    padding: 12px 30px;
 
-        font-size: 24px;
-    }
+    background: #229ED9;
+    color: white;
 
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
 }
-@media screen and (min-width: 768px) {
-    #checkButton {
-        width: 180px !important;
-        height: 750px !important;
-        font-size: 42px !important;
-    }
 
-    #pigButton {
-        width: 300px !important;
-        min-height: 160px !important;
-        right: 50px !important;
-        bottom: 50px !important;
-        font-size: 28px !important;
-    }
-    @media screen and (max-width: 767px) {
-    #checkButton {
-        width: 80px !important;
-        height: 350px !important;
-        font-size: 24px !important;
-    }
+#telegramButton:hover {
+    transform: scale(1.05);
+    background: #168AC0;
 }
+
+#telegramButton:active {
+    transform: scale(0.97);
 }
-/* Окно результата */
+
+/* ОКНО РЕЗУЛЬТАТА */
 
 .modal {
     display: none;
@@ -153,13 +151,25 @@ min-width: 768px {
     text-align: center;
 }
 
-.modalContent img {
-    display: block;
+.resultImages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: 100%;
-    max-height: 85vh;
+}
 
-    object-fit: contain;
+.resultImages img {
+    width: 500px;
+    height: 500px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+#resultImage2 {
+    display: none;
 }
 
 #resultText {
@@ -196,90 +206,107 @@ min-width: 768px {
 
     z-index: 3;
 }
-.resultImages {
-    display: flex;
-    width: 100%;
-}
 
-.resultImages img {
-    width: 100%;
-    height: auto;
-    max-height: 85vh;
-    object-fit: cover;
-}
+/* ФЕЙЕРВЕРК */
 
-#resultImage2 {
-    display: none;
-}
-.resultImages {
-    display: flex;
-    flex-direction: row;
-    gap: 0;
-    justify-content: center;
-    align-items: stretch;
-    width: 100%;
-}
-
-.resultImages img {
-    width: 50%;
-    height: 500px;
-    object-fit: cover;
-    display: block;
-    margin: 0;
-}
-.resultImages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.resultImages img {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-}
 #fireworks {
     position: fixed;
     inset: 0;
-    left: 0;
+
     width: 100vw;
     height: 100vh;
+
     pointer-events: none;
+
     z-index: 999999;
 }
-#telegramButton {
-    display: block;
-    margin: 30px auto 0;
-    padding: 12px 30px;
 
-    background: #229ED9;
-    color: white;
+/* =========================
+   ПК
+   ========================= */
 
-    border: none;
-    border-radius: 10px;
+@media screen and (min-width: 768px) {
 
-    font-size: 16px;
-    font-weight: bold;
+    #checkButton {
+        width: 180px;
+        height: 750px;
+        font-size: 42px;
+    }
 
-    cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    #secondButton {
+        width: 300px;
+        min-height: 160px;
+
+        right: 50px;
+        bottom: 50px;
+
+        font-size: 28px;
+    }
 }
 
-#telegramButton:hover {
-    transform: scale(1.05);
-    background: #168AC0;
-}
+/* =========================
+   ТЕЛЕФОН
+   ========================= */
 
-#telegramButton:active {
-    transform: scale(0.97);
-}
+@media screen and (max-width: 767px) {
 
-/* Телефон */
-max-width: 600px {
+    .container {
+        padding-top: 35px;
+        min-height: 100vh;
+    }
+
+    h1 {
+        width: 90%;
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    #nameInput {
+        width: 75%;
+        max-width: 330px;
+        height: 70px;
+
+        font-size: 24px;
+    }
+
+    #checkButton {
+        width: 70px;
+        height: 300px;
+
+        font-size: 22px;
+    }
+
     #telegramButton {
         width: 85%;
+
+        margin-top: 25px;
+
         padding: 18px 20px;
+
         font-size: 20px;
         border-radius: 14px;
+    }
+
+    #secondButton {
+        position: static;
+
+        width: 85%;
+        min-height: 80px;
+
+        margin-top: 25px;
+
+        padding: 15px 20px;
+
+        font-size: 20px;
+    }
+
+    .modalContent {
+        width: 90vw;
+    }
+
+    .resultImages img {
+        width: 90vw;
+        height: auto;
+        max-height: 80vh;
     }
 }
