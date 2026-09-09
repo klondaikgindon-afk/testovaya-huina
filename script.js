@@ -275,4 +275,25 @@ checkButton.addEventListener("click", function () {
 closeModal.addEventListener("click", function () {
     modal.style.display = "none";
 });
+const secondButton = document.getElementById("secondButton");
+
+secondButton.addEventListener("click", function () {
+
+    resultImage.src = "images/pig1.jpg";
+
+    resultImage.style.display = "block";
+    resultImage2.style.display = "none";
+
+    resultText.textContent = "";
+
+    modal.style.display = "flex";
+
+});
+const telegramButton = document.getElementById("telegramButton");
+
+telegramButton.addEventListener("click", function () {
+    const message = encodeURIComponent("иди нахуй!!! ");
+
+    window.location.href = "https://t.me/kl0ndaik?=&text=" + message;
+});
 });

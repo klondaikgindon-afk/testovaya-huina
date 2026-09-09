@@ -68,7 +68,7 @@ h1 {
     cursor: pointer;
 }
 
-#pigButton {
+#secondButton {
     position: absolute;
 
     right: 25px;
@@ -246,4 +246,40 @@ min-width: 768px {
     height: 100vh;
     pointer-events: none;
     z-index: 999999;
+}
+#telegramButton {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 30px;
+
+    background: #229ED9;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#telegramButton:hover {
+    transform: scale(1.05);
+    background: #168AC0;
+}
+
+#telegramButton:active {
+    transform: scale(0.97);
+}
+
+/* Телефон */
+max-width: 600px {
+    #telegramButton {
+        width: 85%;
+        padding: 18px 20px;
+        font-size: 20px;
+        border-radius: 14px;
+    }
 }
