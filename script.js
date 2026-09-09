@@ -1,3 +1,144 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+
+    const celebrationSound =
+        document.getElementById("celebrationSound");
+
+    let particles = [];
+    let fireworksRunning = false;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+
+    window.addEventListener("resize", resizeCanvas);
+
+    function createFirework() {
+
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height * 0.55;
+
+        const colors = [
+            "#ff0000",
+            "#00ff00",
+            "#00aaff",
+            "#ffff00",
+            "#ff00ff",
+            "#ffffff",
+            "#ff8800"
+        ];
+
+        const color =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        for (let i = 0; i < 80; i++) {
+
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 7 + 2;
+
+            particles.push({
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 100,
+                color: color,
+                size: Math.random() * 3 + 1
+            });
+        }
+    }
+
+    function animateFireworks() {
+
+        if (!fireworksRunning) {
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+            return;
+        }
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        if (Math.random() < 0.12) {
+            createFirework();
+        }
+
+        particles.forEach((particle, index) => {
+
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+
+            particle.vy += 0.05;
+            particle.life--;
+
+            ctx.globalAlpha = particle.life / 100;
+            ctx.fillStyle = particle.color;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            if (particle.life <= 0) {
+                particles.splice(index, 1);
+            }
+        });
+
+        ctx.globalAlpha = 1;
+
+        requestAnimationFrame(animateFireworks);
+    }
+
+    function startCelebration() {
+
+        fireworksRunning = true;
+        particles = [];
+
+        animateFireworks();
+
+        if (celebrationSound) {
+
+            celebrationSound.currentTime = 0;
+
+            celebrationSound.play().catch(function (error) {
+                console.log("Звук заблокирован браузером:", error);
+            });
+        }
+
+        setTimeout(function () {
+
+            fireworksRunning = false;
+            particles = [];
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        }, 5000);
+    }
 const specialNames = [
     "никита"
 ];
@@ -28,6 +169,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "ВЫ ЖИРНЫЙ СВИНКА";
 
         modal.style.display = "flex";
+        startCelebration();
 
     } else if (name === "лера") {
 
@@ -40,6 +182,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "ВЫ АЛЬТУШКА 10 ЛЕТ (ЖИРНАЯ)";
 
         modal.style.display = "flex";
+        startCelebration();
 
     } else if (
         name === "владик" ||
@@ -55,6 +198,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
         } else if (
         name === "глеб"
     ) {
@@ -67,6 +211,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
         } else if (
         name === "артур"
     ) {
@@ -79,6 +224,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
         } else if (
         name === "денис"
     ) {
@@ -91,6 +237,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
         } else if (
         name === "лев"
     ) {
@@ -103,6 +250,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
         } else if (
         name === "рита"
     ) {
@@ -115,6 +263,7 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        startCelebration();
 
     } else {
 
@@ -125,4 +274,5 @@ checkButton.addEventListener("click", function () {
 
 closeModal.addEventListener("click", function () {
     modal.style.display = "none";
+});
 });
