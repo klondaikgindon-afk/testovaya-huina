@@ -55,10 +55,70 @@ checkButton.addEventListener("click", function () {
         resultText.textContent = "";
 
         modal.style.display = "flex";
+        } else if (
+        name === "глеб"
+    ) {
+
+        resultImage.src = "images/gleb.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        } else if (
+        name === "артур"
+    ) {
+
+        resultImage.src = "images/artur.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        } else if (
+        name === "денис"
+    ) {
+
+        resultImage.src = "images/denis.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        } else if (
+        name === "лев"
+    ) {
+
+        resultImage.src = "images/lev.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        } else if (
+        name === "рита"
+    ) {
+
+        resultImage.src = "images/rita.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
 
     } else {
 
-        alert("Пока это имя не добавлено 😎");
+        alert("пока иди нахуй😎");
 
     }
 });

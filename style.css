@@ -121,6 +121,13 @@ min-width: 768px {
         bottom: 50px !important;
         font-size: 28px !important;
     }
+    @media screen and (max-width: 767px) {
+    #checkButton {
+        width: 80px !important;
+        height: 350px !important;
+        font-size: 24px !important;
+    }
+}
 }
 /* Окно результата */
 
