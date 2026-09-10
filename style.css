@@ -333,3 +333,51 @@ h1 {
         max-height: 80vh;
     }
 }
+#sendPersonButton {
+    display: none;
+
+    margin: 20px auto 0;
+
+    padding: 14px 30px;
+
+    background: #14526d;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: transform 0.2s, background 0.2s;
+}
+
+#sendPersonButton:hover {
+    transform: scale(1.05);
+    background: #132933;
+}
+
+#sendPersonButton:active {
+    transform: scale(0.97);
+}
+
+/* Телефон */
+
+@media screen and (max-width: 767px) {
+
+    #sendPersonButton {
+        width: 85%;
+        max-width: 350px;
+
+        margin-top: 15px;
+
+        padding: 17px 12px;
+
+        font-size: 19px;
+        line-height: 1.2;
+
+        border-radius: 14px;
+    }
+}

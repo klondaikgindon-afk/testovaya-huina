@@ -1,4 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const telegramPeople = {
+    "егор": "Raivisor",
+    "леша": "gucdebooo",
+    "влад": "vlad48_68",
+    "глеб": "CrazyBoy_2007",
+    "артур": "Fr1z_btw",
+    "денис": "kl0ndaik",
+    "лев": "smokeymonke",
+    "вадим": "vad1m22",
+    "андрей": "Bananoviysochok",
+};
+
+const sendPersonButton =
+    document.getElementById("sendPersonButton");
+
+function setupPersonButton(name) {
+    const username = telegramPeople[name];
+
+    if (!username) {
+        sendPersonButton.style.display = "none";
+        return;
+    }
+
+    const displayNames = {
+        "егор": "Егора",
+        "леша": "Лешу",
+        "влад": "Влада",
+        "глеб": "Глеба",
+        "артур": "Артура",
+        "денис": "Дениса",
+        "лев": "Льва",
+        "вадим": "Вадима",
+        "андрей": "Андрея"
+    };
+
+    sendPersonButton.textContent =
+        "послать " + displayNames[name] + " нахуй";
+
+    sendPersonButton.style.display = "block";
+
+    sendPersonButton.onclick = function () {
+        const message = encodeURIComponent("иди нахуй!!!");
+
+        window.location.href =
+            "https://t.me/" + username + "?text=" + message;
+    };
+}
+
 
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
@@ -196,6 +244,7 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        setupPersonButton(name);
 
         modal.style.display = "flex";
         startCelebration();
@@ -209,6 +258,7 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        setupPersonButton(name);
 
         modal.style.display = "flex";
         startCelebration();
@@ -222,6 +272,7 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        setupPersonButton(name);
 
         modal.style.display = "flex";
         startCelebration();
@@ -235,6 +286,7 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        setupPersonButton(name);
 
         modal.style.display = "flex";
         startCelebration();
@@ -248,8 +300,10 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        setupPersonButton(name);
 
         modal.style.display = "flex";
+        
         startCelebration();
         } else if (
         name === "рита"
@@ -261,10 +315,98 @@ checkButton.addEventListener("click", function () {
         resultImage2.style.display = "none";
 
         resultText.textContent = "";
+        
 
         modal.style.display = "flex";
         startCelebration();
+        } else if (
+        name === "егор"
+    ) {
 
+        resultImage.src = "images/egor.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+        setupPersonButton(name);
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        startCelebration();
+} else if (
+        name === "леша" ||
+        name === "алексей" ||
+        name === "лёша"
+    ) {
+
+        resultImage.src = "images/lesha.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+        setupPersonButton(name);
+
+        modal.style.display = "flex";
+        startCelebration();
+} else if (
+        name === "вадим"
+    ) {
+
+        resultImage.src = "images/vadim.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+        setupPersonButton(name);
+
+        modal.style.display = "flex";
+        startCelebration();
+ } else if (
+        name === "андрей" 
+        
+    ) {
+
+        resultImage.src = "images/andrey.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+        setupPersonButton(name);
+
+        modal.style.display = "flex";
+        startCelebration();       
+} else if (
+        name === "артем" ||
+        name === "артём" 
+    ) {
+
+        resultImage.src = "images/artem.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+        
+
+        modal.style.display = "flex";
+        startCelebration();
+} else if (
+        name === "макс" ||
+        name === "максим" 
+    ) {
+
+        resultImage.src = "images/maks.png";
+        resultImage.style.display = "block";
+
+        resultImage2.style.display = "none";
+
+        resultText.textContent = "";
+
+        modal.style.display = "flex";
+        startCelebration();
     } else {
 
         alert("пока иди нахуй😎");
