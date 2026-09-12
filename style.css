@@ -636,15 +636,14 @@ h1 {
         top: 10px;
         right: 10px;
 
-        width: 235px;
+        width: 230px;
+        height: 52px;
         min-height: 52px;
 
-        padding: 6px 9px;
-        box-sizing: border-box;
+        padding: 5px 8px;
 
         display: flex;
         align-items: center;
-        justify-content: flex-end;
 
         gap: 7px;
 
@@ -654,37 +653,88 @@ h1 {
         z-index: 10000;
     }
 
+    /* Длинный ползунок слева */
     #musicVolume {
-        width: 75px;
+        width: 105px;
         height: 5px;
+
         flex-shrink: 0;
+
+        appearance: none;
+        -webkit-appearance: none;
+
+        background: #2b2525;
+        border-radius: 10px;
+
+        cursor: pointer;
     }
 
+    /* Фотка на ползунке */
     #musicVolume::-webkit-slider-thumb {
-        width: 32px;
-        height: 32px;
+        appearance: none;
+        -webkit-appearance: none;
+
+        width: 30px;
+        height: 30px;
+
+        border-radius: 50%;
+
+        background-image: url("images/music-avatar.png");
+        background-size: cover;
+        background-position: center;
+
+        border: none;
     }
 
     #musicVolume::-moz-range-thumb {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
+
+        border-radius: 50%;
+
+        background-image: url("images/music-avatar.png");
+        background-size: cover;
+        background-position: center;
+
+        border: none;
     }
 
+    /* Круглая кнопка */
     #musicPlayButton {
         width: 40px;
         height: 40px;
+
+        padding: 0;
         flex-shrink: 0;
+
+        border: none;
+        border-radius: 50%;
+
+        background: #f5e5e9;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
     }
 
     #musicPlayIcon {
         font-size: 21px;
+        color: #000;
+        line-height: 1;
     }
 
+    /* Мурино FM */
     #musicTitle {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
+
+        color: #000;
+
         white-space: nowrap;
-        transform: translateX(0);
+
+        transform: translateX(-2px);
     }
 }
 
