@@ -60,7 +60,8 @@ h1 {
     height: 500px;
 
     border: none;
-    background: white;
+    background: #a64f73;
+    color: white;
 
     font-size: 28px;
     font-weight: normal;
@@ -85,7 +86,8 @@ h1 {
     padding: 15px 20px;
 
     border: none;
-    background: white;
+    background: #a64f73;
+    color: white;
 
     font-size: 18px;
     line-height: 1.2;
@@ -125,6 +127,40 @@ h1 {
 
 #telegramButton:active {
     transform: scale(0.97);
+}
+
+/* Анимация основных кнопок */
+#checkButton,
+#secondButton,
+#telegramButton {
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#checkButton:hover {
+    transform: translateY(-50%) scale(1.05);
+    background: #b85b80;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+#secondButton:hover,
+#telegramButton:hover {
+    transform: scale(1.05);
+    background: #b85b80;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+#checkButton:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+#secondButton:active,
+#telegramButton:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ОКНО РЕЗУЛЬТАТА */
@@ -340,7 +376,7 @@ h1 {
 
     padding: 14px 30px;
 
-    background: #14526d;
+    background: #a64f73;
     color: white;
 
     border: none;
@@ -356,7 +392,7 @@ h1 {
 
 #sendPersonButton:hover {
     transform: scale(1.05);
-    background: #132933;
+    background: #b85b80;
 }
 
 #sendPersonButton:active {
@@ -379,5 +415,292 @@ h1 {
         line-height: 1.2;
 
         border-radius: 14px;
+    }
+}
+/* =========================
+   FUCK АНИМАЦИЯ
+   ========================= */
+
+.resultImages {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Основные картинки */
+.resultImages > img:not(#fuckImage) {
+    position: relative;
+    z-index: 1;
+}
+
+/* FUCK поверх основной картинки */
+#fuckImage {
+    position: absolute;
+
+    /* Насколько залезает на фотку */
+    top: 55%;
+    left: 50%;
+
+    width: min(55vw, 280px);
+    max-width: 60%;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    margin: 0;
+
+    object-fit: contain;
+    pointer-events: none;
+
+    animation: fuckAnimation 1.2s ease-in-out infinite;
+}
+@keyframes fuckAnimation {
+
+    0% {
+        transform: scale(0.75) rotate(-8deg);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: scale(1.05) rotate(6deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1) rotate(-4deg);
+        opacity: 1;
+    }
+
+    75% {
+        transform: scale(1.08) rotate(5deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.75) rotate(-8deg);
+        opacity: 0.5;
+    }
+}
+
+/* =========================
+   ТЕЛЕФОН
+   ========================= */
+
+@media max-width: 600px {
+
+    #fuckImage {
+        width: min(55vw, 220px);
+        max-width: 65%;
+
+        top: 55%;
+        left: 50%;
+
+        animation-duration: 1s;
+    }
+}
+/* =========================
+   МУРИНО FM
+   ========================= */
+
+#musicPlayer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    width: 430px;
+    min-height: 76px;
+
+    padding: 10px 16px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    background: #a64f73;
+    border-radius: 40px;
+
+    z-index: 10000;
+}
+
+/* ДЛИННЫЙ ПОЛЗУНОК СЛЕВА */
+
+#musicVolume {
+    width: 190px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: #2b2525;
+    border-radius: 10px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* КРУЖОК ПОЛЗУНКА */
+
+#musicVolume::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background-color: #f5e5e9;
+    background-image: url("images/music-avatar.png");
+    background-size: cover;
+    background-position: center;
+
+    border: 3px solid #f5e5e9;
+
+    cursor: pointer;
+}
+
+#musicVolume::-moz-range-thumb {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background-color: #f5e5e9;
+    background-image: url("images/music-avatar.png");
+    background-size: cover;
+    background-position: center;
+
+    border: 3px solid #f5e5e9;
+
+    cursor: pointer;
+}
+
+/* PLAY / PAUSE */
+
+#musicPlayButton {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f5e5e9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease;
+}
+
+#musicPlayButton:active {
+    transform: scale(0.9);
+}
+
+#musicPlayIcon {
+    font-size: 30px;
+    line-height: 1;
+    color: #000;
+}
+
+/* НАЗВАНИЕ */
+
+#musicTitle {
+    font-size: 25px;
+    font-weight: bold;
+
+    color: #000;
+
+    white-space: nowrap;
+    transform: translateX(-10px);
+}
+
+/* МОБИЛКА */
+
+@media max-width: 600px {
+
+    #musicPlayer {
+        top: 10px;
+        right: 10px;
+
+        width: 350px;
+        min-height: 62px;
+
+        padding: 7px 10px;
+
+        gap: 9px;
+    }
+
+    #musicVolume {
+        width: 155px;
+    }
+
+    #musicPlayButton {
+        width: 48px;
+        height: 48px;
+    }
+
+    #musicPlayIcon {
+        font-size: 25px;
+    }
+
+    #musicTitle {
+        font-size: 20px;
+    }
+
+    #musicVolume::-webkit-slider-thumb {
+        width: 38px;
+        height: 38px;
+    }
+
+    #musicVolume::-moz-range-thumb {
+        width: 38px;
+        height: 38px;
+    }
+}
+#resultText {
+    font-size: clamp(60px, 15vw, 220px);
+    font-weight: 900;
+    color: #000;
+    text-align: center;
+    line-height: 1;
+    width: 100%;
+    margin: 20px 0;
+}
+@media max-width: 600px {
+    #resultText {
+        font-size: clamp(55px, 20vw, 130px);
+        font-weight: 900;
+        line-height: 0.95;
+    }
+}
+/* ОГРОМНЫЙ ЕБЛАН */
+#resultText.eblanText {
+    color: #000 !important;
+    font-size: clamp(70px, 18vw, 250px) !important;
+    font-weight: 900 !important;
+    line-height: 0.9 !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 20px 0 !important;
+    padding: 0 !important;
+    text-shadow: none !important;
+}
+@media  max-width: 600px {
+    #resultText.eblanText {
+        font-size: clamp(55px, 22vw, 140px) !important;
+        line-height: 0.9 !important;
     }
 }

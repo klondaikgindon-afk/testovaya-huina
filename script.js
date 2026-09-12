@@ -1,77 +1,253 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const telegramPeople = {
-    "егор": "Raivisor",
-    "леша": "gucdebooo",
-    "влад": "vlad48_68",
-    "глеб": "CrazyBoy_2007",
-    "артур": "Fr1z_btw",
-    "денис": "kl0ndaik",
-    "лев": "smokeymonke",
-    "вадим": "vad1m22",
-    "андрей": "Bananoviysochok",
-};
 
-const sendPersonButton =
-    document.getElementById("sendPersonButton");
+    // =========================
+    // СЛУЧАЙНЫЕ КАРТИНКИ
+    // =========================
 
-function setupPersonButton(name) {
-    const username = telegramPeople[name];
+    const randomImages = [];
 
-    if (!username) {
-        sendPersonButton.style.display = "none";
-        return;
+    for (let i = 1; i <= 50; i++) {
+        randomImages.push("images/" + i + ".png");
     }
 
-    const displayNames = {
-        "егор": "Егора",
-        "леша": "Лешу",
-        "влад": "Влада",
-        "глеб": "Глеба",
-        "артур": "Артура",
-        "денис": "Дениса",
-        "лев": "Льва",
-        "вадим": "Вадима",
-        "андрей": "Андрея"
+
+    // =========================
+    // TELEGRAM ЛЮДИ
+    // =========================
+
+    const telegramPeople = {
+        "егор": "Raivisor",
+        "леша": "gucdebooo",
+        "влад": "vlad48_68",
+        "глеб": "CrazyBoy_2007",
+        "артур": "Fr1z_btw",
+        "денис": "kl0ndaik",
+        "лев": "smokeymonke",
+        "вадим": "vad1m22",
+        "андрей": "Bananoviysochok"
     };
 
-    sendPersonButton.textContent =
-        "послать " + displayNames[name] + " нахуй";
 
-    sendPersonButton.style.display = "block";
-
-    sendPersonButton.onclick = function () {
-        const message = encodeURIComponent("иди нахуй!!!");
-
-        window.location.href =
-            "https://t.me/" + username + "?text=" + message;
-    };
-}
+    const sendPersonButton =
+        document.getElementById("sendPersonButton");
 
 
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
+    // =========================
+    // ОСОБЫЕ ИМЕНА
+    // =========================
+
+    const specialNames = [
+        "никита",
+        "лера",
+        "рита",
+        "макс",
+        "максим",
+        "артем",
+        "артём"
+    ];
+
+
+    // =========================
+    // КНОПКА ПОСЛАТЬ НАХУЙ
+    // =========================
+
+    function setupPersonButton(name) {
+
+        if (!sendPersonButton) {
+            return;
+        }
+
+        // Специальная кнопка
+        if (
+            specialNames.includes(name) ||
+            name === "__unknown__"
+        ) {
+
+            sendPersonButton.textContent =
+                "ПОСЛАТЬ НАХУЙ";
+
+            sendPersonButton.style.display =
+                "block";
+
+            sendPersonButton.onclick =
+                function () {
+
+                    let fuckImage =
+                        document.getElementById("fuckImage");
+
+
+                    if (!fuckImage) {
+
+                        fuckImage =
+                            document.createElement("img");
+
+                        fuckImage.id =
+                            "fuckImage";
+
+                        fuckImage.src =
+                            "images/fuck.png";
+
+                        fuckImage.alt =
+                            "FUCK";
+
+
+                        const resultImages =
+                            document.querySelector(".resultImages");
+
+
+                        if (resultImages) {
+                            resultImages.appendChild(
+                                fuckImage
+                            );
+                        }
+                    }
+
+
+                    fuckImage.style.display =
+                        "block";
+
+
+                    const fuckSound =
+                        new Audio(
+                            "sounds/FUCK.mp3"
+                        );
+
+
+                    fuckSound.currentTime = 0;
+
+
+                    fuckSound.play().catch(
+                        function (error) {
+
+                            console.log(
+                                "Звук заблокирован браузером:",
+                                error
+                            );
+
+                        }
+                    );
+                };
+
+
+            return;
+        }
+
+
+        // =========================
+        // TELEGRAM-КНОПКА
+        // =========================
+
+        const username =
+            telegramPeople[name];
+
+
+        if (!username) {
+
+            sendPersonButton.style.display =
+                "none";
+
+            return;
+        }
+
+
+        const displayNames = {
+
+            "егор": "Егора",
+            "леша": "Лешу",
+            "влад": "Влада",
+            "глеб": "Глеба",
+            "артур": "Артура",
+            "денис": "Дениса",
+            "лев": "Льва",
+            "вадим": "Вадима",
+            "андрей": "Андрея"
+
+        };
+
+
+        sendPersonButton.textContent =
+            "послать " +
+            displayNames[name] +
+            " нахуй";
+
+
+        sendPersonButton.style.display =
+            "block";
+
+
+        sendPersonButton.onclick =
+            function () {
+
+                const message =
+                    encodeURIComponent(
+                        "иди нахуй!!!"
+                    );
+
+
+                window.location.href =
+                    "https://t.me/" +
+                    username +
+                    "?text=" +
+                    message;
+            };
+    }
+
+
+    // =========================
+    // ФЕЙЕРВЕРК
+    // =========================
+
+    const canvas =
+        document.getElementById("fireworks");
+
+    const ctx =
+        canvas.getContext("2d");
 
     const celebrationSound =
-        document.getElementById("celebrationSound");
+        document.getElementById(
+            "celebrationSound"
+        );
+
 
     let particles = [];
+
     let fireworksRunning = false;
 
+
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+
+        canvas.width =
+            window.innerWidth;
+
+        canvas.height =
+            window.innerHeight;
     }
+
 
     resizeCanvas();
 
-    window.addEventListener("resize", resizeCanvas);
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
+
 
     function createFirework() {
 
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height * 0.55;
+        const x =
+            Math.random() *
+            canvas.width;
+
+
+        const y =
+            Math.random() *
+            canvas.height *
+            0.55;
+
 
         const colors = [
+
             "#ff0000",
             "#00ff00",
             "#00aaff",
@@ -79,39 +255,74 @@ function setupPersonButton(name) {
             "#ff00ff",
             "#ffffff",
             "#ff8800"
+
         ];
 
+
         const color =
-            colors[Math.floor(Math.random() * colors.length)];
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
 
         for (let i = 0; i < 80; i++) {
 
-            const angle = Math.random() * Math.PI * 2;
-            const speed = Math.random() * 7 + 2;
+            const angle =
+                Math.random() *
+                Math.PI *
+                2;
+
+
+            const speed =
+                Math.random() *
+                7 +
+                2;
+
 
             particles.push({
+
                 x: x,
                 y: y,
-                vx: Math.cos(angle) * speed,
-                vy: Math.sin(angle) * speed,
+
+                vx:
+                    Math.cos(angle) *
+                    speed,
+
+                vy:
+                    Math.sin(angle) *
+                    speed,
+
                 life: 100,
+
                 color: color,
-                size: Math.random() * 3 + 1
+
+                size:
+                    Math.random() *
+                    3 +
+                    1
+
             });
         }
     }
 
+
     function animateFireworks() {
 
         if (!fireworksRunning) {
+
             ctx.clearRect(
                 0,
                 0,
                 canvas.width,
                 canvas.height
             );
+
             return;
         }
+
 
         ctx.clearRect(
             0,
@@ -120,322 +331,1244 @@ function setupPersonButton(name) {
             canvas.height
         );
 
+
         if (Math.random() < 0.12) {
+
             createFirework();
+
         }
 
-        particles.forEach((particle, index) => {
 
-            particle.x += particle.vx;
-            particle.y += particle.vy;
+        particles.forEach(
+            function (particle, index) {
 
-            particle.vy += 0.05;
-            particle.life--;
+                particle.x +=
+                    particle.vx;
 
-            ctx.globalAlpha = particle.life / 100;
-            ctx.fillStyle = particle.color;
+                particle.y +=
+                    particle.vy;
 
-            ctx.beginPath();
+                particle.vy +=
+                    0.05;
 
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.size,
-                0,
-                Math.PI * 2
-            );
+                particle.life--;
 
-            ctx.fill();
 
-            if (particle.life <= 0) {
-                particles.splice(index, 1);
+                ctx.globalAlpha =
+                    particle.life / 100;
+
+
+                ctx.fillStyle =
+                    particle.color;
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.size,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fill();
+
+
+                if (particle.life <= 0) {
+
+                    particles.splice(
+                        index,
+                        1
+                    );
+                }
+
             }
-        });
+        );
+
 
         ctx.globalAlpha = 1;
 
-        requestAnimationFrame(animateFireworks);
+
+        requestAnimationFrame(
+            animateFireworks
+        );
     }
+
 
     function startCelebration() {
 
         fireworksRunning = true;
+
         particles = [];
+
 
         animateFireworks();
 
+
         if (celebrationSound) {
 
-            celebrationSound.currentTime = 0;
+            celebrationSound.currentTime =
+                0;
 
-            celebrationSound.play().catch(function (error) {
-                console.log("Звук заблокирован браузером:", error);
-            });
+
+            celebrationSound.play().catch(
+                function (error) {
+
+                    console.log(
+                        "Звук заблокирован браузером:",
+                        error
+                    );
+
+                }
+            );
         }
 
-        setTimeout(function () {
 
-            fireworksRunning = false;
-            particles = [];
+        setTimeout(
+            function () {
 
-            ctx.clearRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
+                fireworksRunning =
+                    false;
+
+                particles = [];
+
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+            },
+            5000
+        );
+    }
+
+
+    // =========================
+    // ОСНОВНЫЕ ЭЛЕМЕНТЫ
+    // =========================
+
+    const checkButton =
+        document.getElementById(
+            "checkButton"
+        );
+
+
+    const nameInput =
+        document.getElementById(
+            "nameInput"
+        );
+
+
+    const modal =
+        document.getElementById(
+            "resultModal"
+        );
+
+
+    const closeModal =
+        document.getElementById(
+            "closeModal"
+        );
+
+
+    const resultImage =
+        document.getElementById(
+            "resultImage"
+        );
+
+
+    const resultImage2 =
+        document.getElementById(
+            "resultImage2"
+        );
+
+
+    const resultText =
+        document.getElementById(
+            "resultText"
+        );
+
+
+    function hideFuckImage() {
+
+        const fuckImage =
+            document.getElementById(
+                "fuckImage"
             );
 
-        }, 5000);
+
+        if (fuckImage) {
+
+            fuckImage.style.display =
+                "none";
+        }
     }
-const specialNames = [
-    "никита"
-];
 
-const checkButton = document.getElementById("checkButton");
-const nameInput = document.getElementById("nameInput");
 
-const modal = document.getElementById("resultModal");
-const closeModal = document.getElementById("closeModal");
+    // =========================
+    // ВИДЕО
+    // =========================
 
-const resultImage = document.getElementById("resultImage");
-const resultImage2 = document.getElementById("resultImage2");
-const resultText = document.getElementById("resultText");
+    function showSpecialVideo(videoFile) {
 
-checkButton.addEventListener("click", function () {
+        // Прячем обычные картинки
+        resultImage.style.display =
+            "none";
 
-    const name = nameInput.value.trim().toLowerCase();
+        resultImage2.style.display =
+            "none";
 
-    console.log("Введено имя:", name);
 
-    if (name === "никита") {
+        // Ищем старое видео
+        let specialVideo =
+            document.getElementById(
+                "specialVideo"
+            );
 
-        resultImage.src = "images/nikita.jpg";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+        // Если его ещё нет — создаём
+        if (!specialVideo) {
 
-        resultText.textContent = "ВЫ ЖИРНЫЙ СВИНКА";
+            specialVideo =
+                document.createElement(
+                    "video"
+                );
 
-        modal.style.display = "flex";
-        startCelebration();
+            specialVideo.id =
+                "specialVideo";
 
-    } else if (name === "лера") {
 
-        resultImage.src = "images/lera1.png";
-        resultImage2.src = "images/lera2.jpg";
+            specialVideo.controls =
+                true;
 
-        resultImage.style.display = "block";
-        resultImage2.style.display = "block";
 
-        resultText.textContent = "ВЫ АЛЬТУШКА 10 ЛЕТ (ЖИРНАЯ)";
+            specialVideo.autoplay =
+                true;
 
-        modal.style.display = "flex";
-        startCelebration();
 
-    } else if (
-        name === "владик" ||
-        name === "владислав" ||
-        name === "влад"
-    ) {
+            specialVideo.playsInline =
+                true;
 
-        resultImage.src = "images/vlad.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+            specialVideo.style.width =
+                "100%";
 
-        resultText.textContent = "";
-        setupPersonButton(name);
 
-        modal.style.display = "flex";
-        startCelebration();
-        } else if (
-        name === "глеб"
-    ) {
+            specialVideo.style.maxWidth =
+                "700px";
 
-        resultImage.src = "images/gleb.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+            specialVideo.style.maxHeight =
+                "70vh";
 
-        resultText.textContent = "";
-        setupPersonButton(name);
 
-        modal.style.display = "flex";
-        startCelebration();
-        } else if (
-        name === "артур"
-    ) {
+            specialVideo.style.display =
+                "block";
 
-        resultImage.src = "images/artur.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+            specialVideo.style.margin =
+                "0 auto";
 
-        resultText.textContent = "";
-        setupPersonButton(name);
 
-        modal.style.display = "flex";
-        startCelebration();
-        } else if (
-        name === "денис"
-    ) {
+            const resultImages =
+                document.querySelector(
+                    ".resultImages"
+                );
 
-        resultImage.src = "images/denis.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+            resultImages.appendChild(
+                specialVideo
+            );
+        }
 
-        resultText.textContent = "";
-        setupPersonButton(name);
 
-        modal.style.display = "flex";
-        startCelebration();
-        } else if (
-        name === "лев"
-    ) {
+        specialVideo.src =
+            videoFile;
 
-        resultImage.src = "images/lev.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+        specialVideo.style.display =
+            "block";
 
-        resultText.textContent = "";
-        setupPersonButton(name);
 
-        modal.style.display = "flex";
-        
-        startCelebration();
-        } else if (
-        name === "рита"
-    ) {
+        specialVideo.currentTime =
+            0;
 
-        resultImage.src = "images/rita.png";
-        resultImage.style.display = "block";
 
-        resultImage2.style.display = "none";
+        specialVideo.play().catch(
+            function (error) {
 
-        resultText.textContent = "";
-        
+                console.log(
+                    "Видео не запустилось автоматически:",
+                    error
+                );
 
-        modal.style.display = "flex";
-        startCelebration();
-        } else if (
-        name === "егор"
-    ) {
-
-        resultImage.src = "images/egor.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-        setupPersonButton(name);
-
-        resultText.textContent = "";
-
-        modal.style.display = "flex";
-        startCelebration();
-} else if (
-        name === "леша" ||
-        name === "алексей" ||
-        name === "лёша"
-    ) {
-
-        resultImage.src = "images/lesha.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-
-        resultText.textContent = "";
-        setupPersonButton(name);
-
-        modal.style.display = "flex";
-        startCelebration();
-} else if (
-        name === "вадим"
-    ) {
-
-        resultImage.src = "images/vadim.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-
-        resultText.textContent = "";
-        setupPersonButton(name);
-
-        modal.style.display = "flex";
-        startCelebration();
- } else if (
-        name === "андрей" 
-        
-    ) {
-
-        resultImage.src = "images/andrey.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-
-        resultText.textContent = "";
-        setupPersonButton(name);
-
-        modal.style.display = "flex";
-        startCelebration();       
-} else if (
-        name === "артем" ||
-        name === "артём" 
-    ) {
-
-        resultImage.src = "images/artem.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-
-        resultText.textContent = "";
-        
-
-        modal.style.display = "flex";
-        startCelebration();
-} else if (
-        name === "макс" ||
-        name === "максим" 
-    ) {
-
-        resultImage.src = "images/maks.png";
-        resultImage.style.display = "block";
-
-        resultImage2.style.display = "none";
-
-        resultText.textContent = "";
-
-        modal.style.display = "flex";
-        startCelebration();
-    } else {
-
-        alert("пока иди нахуй😎");
-
+            }
+        );
     }
-});
 
-closeModal.addEventListener("click", function () {
-    modal.style.display = "none";
-});
-const secondButton = document.getElementById("secondButton");
 
-secondButton.addEventListener("click", function () {
+    function hideSpecialVideo() {
 
-    resultImage.src = "images/pig1.jpg";
+        const specialVideo =
+            document.getElementById(
+                "specialVideo"
+            );
 
-    resultImage.style.display = "block";
-    resultImage2.style.display = "none";
 
-    resultText.textContent = "";
+        if (specialVideo) {
 
-    modal.style.display = "flex";
+            specialVideo.pause();
 
-});
-const telegramButton = document.getElementById("telegramButton");
+            specialVideo.currentTime =
+                0;
 
-telegramButton.addEventListener("click", function () {
-    const message = encodeURIComponent("иди нахуй!!! ");
+            specialVideo.style.display =
+                "none";
+        }
+    }
 
-    window.location.href = "https://t.me/kl0ndaik?=&text=" + message;
-});
+
+    // =========================
+    // ПРОВЕРКА
+    // =========================
+
+    checkButton.addEventListener(
+        "click",
+        function () {
+
+            const name =
+                nameInput.value
+                    .trim()
+                    .toLowerCase();
+
+            // Убираем стиль Еблан при новом результате
+            resultText.classList.remove(
+                "eblanText"
+            );
+
+
+            hideFuckImage();
+
+            hideSpecialVideo();
+
+
+            console.log(
+                "Введено:",
+                name
+            );
+
+
+            // =========================
+            // 67
+            // =========================
+
+            if (name === "67") {
+
+                resultText.textContent =
+                    "";
+
+                setupPersonButton(
+                    "__unknown__"
+                );
+
+                showSpecialVideo(
+                    "videos/video1.mp4"
+                );
+
+                modal.style.display =
+                    "flex";
+
+                return;
+            }
+
+
+            // =========================
+            // 1488
+            // =========================
+
+            if (name === "1488") {
+
+                resultText.textContent =
+                    "";
+
+                setupPersonButton(
+                    "__unknown__"
+                );
+
+                showSpecialVideo(
+                    "videos/video2.mp4"
+                );
+
+                modal.style.display =
+                    "flex";
+
+                return;
+            }
+
+
+            // =========================
+            // ПУСТОЙ ВВОД
+            // =========================
+
+            if (name === "") {
+
+                resultText.textContent =
+                    "Еблан?";
+
+                resultText.classList.add(
+                    "eblanText"
+                );
+
+                resultImage.style.display =
+                    "none";
+
+                resultImage2.style.display =
+                    "none";
+
+                // КНОПКУ НЕ ПОКАЗЫВАЕМ
+                sendPersonButton.style.display =
+                    "none";
+
+                modal.style.display =
+                    "flex";
+
+               
+
+                return;
+            }
+
+
+            // =========================
+            // ПРОВЕРКА ВВОДА
+            // Только русские буквы
+            // Одно слово
+            // =========================
+
+            if (!/^[а-яё]+$/i.test(name)) {
+
+                resultText.textContent =
+                    "Еблан?";
+
+                resultText.classList.add(
+                    "eblanText"
+                );
+
+                resultImage.style.display =
+                    "none";
+
+                resultImage2.style.display =
+                    "none";
+
+                // КНОПКУ НЕ ПОКАЗЫВАЕМ
+                sendPersonButton.style.display =
+                    "none";
+
+                modal.style.display =
+                    "flex";
+
+               
+
+                return;
+            }
+
+
+            // =========================
+            // НИКИТА
+            // =========================
+
+            if (name === "никита") {
+
+                resultImage.src =
+                    "images/nikita.jpg";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "ВЫ ЖИРНЫЙ СВИНКА";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ЛЕРА
+            // =========================
+
+            else if (name === "лера") {
+
+                resultImage.src =
+                    "images/lera1.png";
+
+                resultImage2.src =
+                    "images/lera2.jpg";
+
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "block";
+
+
+                resultText.textContent =
+                    "ВЫ АЛЬТУШКА 10 ЛЕТ (ЖИРНАЯ)";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ВЛАД
+            // =========================
+
+            else if (
+                name === "владик" ||
+                name === "владислав" ||
+                name === "влад"
+            ) {
+
+                resultImage.src =
+                    "images/vlad.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(
+                    "влад"
+                );
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ГЛЕБ
+            // =========================
+
+            else if (name === "глеб") {
+
+                resultImage.src =
+                    "images/gleb.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // АРТУР
+            // =========================
+
+            else if (name === "артур") {
+
+                resultImage.src =
+                    "images/artur.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ДЕНИС
+            // =========================
+
+            else if (name === "денис") {
+
+                resultImage.src =
+                    "images/denis.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ЛЕВ
+            // =========================
+
+            else if (name === "лев") {
+
+                resultImage.src =
+                    "images/lev.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // РИТА
+            // =========================
+
+            else if (name === "рита") {
+
+                resultImage.src =
+                    "images/rita.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ЕГОР
+            // =========================
+
+            else if (name === "егор") {
+
+                resultImage.src =
+                    "images/egor.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ЛЕША / АЛЕКСЕЙ
+            // =========================
+
+            else if (
+                name === "леша" ||
+                name === "алексей" ||
+                name === "лёша"
+            ) {
+
+                resultImage.src =
+                    "images/lesha.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(
+                    "леша"
+                );
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // ВАДИМ
+            // =========================
+
+            else if (name === "вадим") {
+
+                resultImage.src =
+                    "images/vadim.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // АНДРЕЙ
+            // =========================
+
+            else if (name === "андрей") {
+
+                resultImage.src =
+                    "images/andrey.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // АРТЕМ
+            // =========================
+
+            else if (
+                name === "артем" ||
+                name === "артём"
+            ) {
+
+                resultImage.src =
+                    "images/artem.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // МАКС
+            // =========================
+
+            else if (
+                name === "макс" ||
+                name === "максим"
+            ) {
+
+                resultImage.src =
+                    "images/maks.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(name);
+
+
+                modal.style.display =
+                    "flex";
+
+
+                startCelebration();
+            }
+
+
+            // =========================
+            // НЕИЗВЕСТНОЕ РУССКОЕ ИМЯ
+            // =========================
+
+            else {
+
+                const randomImage =
+                    randomImages[
+                        Math.floor(
+                            Math.random() *
+                            randomImages.length
+                        )
+                    ];
+
+
+                resultImage.src =
+                    randomImage;
+
+
+                resultImage.style.display =
+                    "block";
+
+S
+                resultImage2.style.display =
+                    "none";
+
+
+                resultText.textContent =
+                    "";
+
+
+                setupPersonButton(
+                    "__unknown__"
+                );
+
+
+                modal.style.display =
+                    "flex";
+                startCelebration();
+            }
+
+        }
+    );
+
+
+    // =========================
+    // ЗАКРЫТИЕ МОДАЛКИ
+    // =========================
+
+    closeModal.addEventListener(
+        "click",
+        function () {
+
+            modal.style.display =
+                "none";
+
+
+            hideSpecialVideo();
+
+        }
+    );
+
+
+    // =========================
+    // СВИНКА
+    // =========================
+
+    const secondButton =
+        document.getElementById(
+            "secondButton"
+        );
+
+
+    secondButton.addEventListener(
+        "click",
+        function () {
+
+            hideSpecialVideo();
+
+
+            resultImage.src =
+                "images/pig1.jpg";
+
+
+            resultImage.style.display =
+                "block";
+
+
+            resultImage2.style.display =
+                "none";
+
+
+            resultText.textContent =
+                "";
+
+
+            if (sendPersonButton) {
+
+                sendPersonButton.style.display =
+                    "none";
+            }
+
+
+            modal.style.display =
+                "flex";
+
+
+            startCelebration();
+        }
+    );
+
+
+    // =========================
+    // TELEGRAM СОЗДАТЕЛЯ
+    // =========================
+
+    const telegramButton =
+        document.getElementById(
+            "telegramButton"
+        );
+
+
+    telegramButton.addEventListener(
+        "click",
+        function () {
+
+            const message =
+                encodeURIComponent(
+                    "иди нахуй!!!"
+                );
+
+
+            window.location.href =
+                "https://t.me/kl0ndaik?text=" +
+                message;
+        }
+    );
+
+
+    // =========================
+    // МУРИНО FM
+    // =========================
+
+    const musicAudio =
+        document.getElementById(
+            "musicAudio"
+        );
+
+
+    const musicPlayButton =
+        document.getElementById(
+            "musicPlayButton"
+        );
+
+
+    const musicPlayIcon =
+        document.getElementById(
+            "musicPlayIcon"
+        );
+
+
+    const musicVolume =
+        document.getElementById(
+            "musicVolume"
+        );
+
+
+    // Количество треков
+    const MUSIC_TRACK_COUNT = 20;
+
+
+    const musicTracks = [];
+
+
+    for (
+        let i = 1;
+        i <= MUSIC_TRACK_COUNT;
+        i++
+    ) {
+
+        musicTracks.push(
+            "music/" + i + ".mp3"
+        );
+    }
+
+
+    let currentMusicTrack = -1;
+
+    let musicStarted = false;
+
+
+    function getRandomMusicTrack() {
+
+        let randomIndex;
+
+
+        do {
+
+            randomIndex =
+                Math.floor(
+                    Math.random() *
+                    musicTracks.length
+                );
+
+        } while (
+            musicTracks.length > 1 &&
+            randomIndex ===
+            currentMusicTrack
+        );
+
+
+        return randomIndex;
+    }
+
+
+    function playRandomMusic() {
+
+        if (
+            musicTracks.length === 0
+        ) {
+            return;
+        }
+
+
+        const trackIndex =
+            getRandomMusicTrack();
+
+
+        currentMusicTrack =
+            trackIndex;
+
+
+        musicAudio.src =
+            musicTracks[trackIndex];
+
+
+        musicAudio.volume =
+            musicVolume.value;
+
+
+        musicAudio.play()
+            .then(
+                function () {
+
+                    musicStarted =
+                        true;
+
+                    musicPlayIcon.textContent =
+                        "Ⅱ";
+
+                }
+            )
+            .catch(
+                function (error) {
+
+                    console.log(
+                        "Музыка не запустилась:",
+                        error
+                    );
+
+                }
+            );
+    }
+
+
+    musicPlayButton.addEventListener(
+        "click",
+        function () {
+
+            // Первый запуск
+            if (!musicStarted) {
+
+                playRandomMusic();
+
+                return;
+            }
+
+
+            // Музыка стоит на паузе
+            if (musicAudio.paused) {
+
+                musicAudio.play()
+                    .then(
+                        function () {
+
+                            musicPlayIcon.textContent =
+                                "Ⅱ";
+
+                        }
+                    )
+                    .catch(
+                        function (error) {
+
+                            console.log(
+                                "Не удалось продолжить:",
+                                error
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            // Музыка играет
+            else {
+
+                musicAudio.pause();
+
+
+                musicPlayIcon.textContent =
+                    "▶";
+            }
+
+        }
+    );
+
+
+    musicVolume.addEventListener(
+        "input",
+        function () {
+
+            musicAudio.volume =
+                musicVolume.value;
+        }
+    );
+
+
+    musicAudio.addEventListener(
+        "ended",
+        function () {
+
+            playRandomMusic();
+
+        }
+    );
+
 });
