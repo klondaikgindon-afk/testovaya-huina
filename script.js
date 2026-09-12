@@ -1,3 +1,4 @@
+console.log("НОВЫЙ SCRIPT ЗАГРУЖЕН");
 document.addEventListener("DOMContentLoaded", function () {
 
     // =========================
@@ -26,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "вадим": "vad1m22",
         "андрей": "Bananoviysochok"
     };
-
 
     const sendPersonButton =
         document.getElementById("sendPersonButton");
@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     let fuckImage =
                         document.getElementById("fuckImage");
 
-
                     if (!fuckImage) {
 
                         fuckImage =
@@ -90,10 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         fuckImage.alt =
                             "FUCK";
 
-
                         const resultImages =
                             document.querySelector(".resultImages");
-
 
                         if (resultImages) {
                             resultImages.appendChild(
@@ -102,32 +99,25 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
 
-
                     fuckImage.style.display =
                         "block";
-
 
                     const fuckSound =
                         new Audio(
                             "sounds/FUCK.mp3"
                         );
 
-
                     fuckSound.currentTime = 0;
-
 
                     fuckSound.play().catch(
                         function (error) {
-
                             console.log(
                                 "Звук заблокирован браузером:",
                                 error
                             );
-
                         }
                     );
                 };
-
 
             return;
         }
@@ -140,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const username =
             telegramPeople[name];
 
-
         if (!username) {
 
             sendPersonButton.style.display =
@@ -149,9 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         const displayNames = {
-
             "егор": "Егора",
             "леша": "Лешу",
             "влад": "Влада",
@@ -161,19 +148,15 @@ document.addEventListener("DOMContentLoaded", function () {
             "лев": "Льва",
             "вадим": "Вадима",
             "андрей": "Андрея"
-
         };
-
 
         sendPersonButton.textContent =
             "послать " +
             displayNames[name] +
             " нахуй";
 
-
         sendPersonButton.style.display =
             "block";
-
 
         sendPersonButton.onclick =
             function () {
@@ -182,7 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     encodeURIComponent(
                         "иди нахуй!!!"
                     );
-
 
                 window.location.href =
                     "https://t.me/" +
@@ -208,9 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "celebrationSound"
         );
 
-
     let particles = [];
-
     let fireworksRunning = false;
 
 
@@ -226,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     resizeCanvas();
 
-
     window.addEventListener(
         "resize",
         resizeCanvas
@@ -239,15 +218,12 @@ document.addEventListener("DOMContentLoaded", function () {
             Math.random() *
             canvas.width;
 
-
         const y =
             Math.random() *
             canvas.height *
             0.55;
 
-
         const colors = [
-
             "#ff0000",
             "#00ff00",
             "#00aaff",
@@ -255,9 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "#ff00ff",
             "#ffffff",
             "#ff8800"
-
         ];
-
 
         const color =
             colors[
@@ -275,35 +249,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 Math.PI *
                 2;
 
-
             const speed =
                 Math.random() *
                 7 +
                 2;
 
-
             particles.push({
-
                 x: x,
                 y: y,
-
                 vx:
                     Math.cos(angle) *
                     speed,
-
                 vy:
                     Math.sin(angle) *
                     speed,
-
                 life: 100,
-
                 color: color,
-
                 size:
                     Math.random() *
                     3 +
                     1
-
             });
         }
     }
@@ -323,7 +288,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         ctx.clearRect(
             0,
             0,
@@ -333,9 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (Math.random() < 0.12) {
-
             createFirework();
-
         }
 
 
@@ -353,17 +315,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 particle.life--;
 
-
                 ctx.globalAlpha =
                     particle.life / 100;
-
 
                 ctx.fillStyle =
                     particle.color;
 
-
                 ctx.beginPath();
-
 
                 ctx.arc(
                     particle.x,
@@ -372,7 +330,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     0,
                     Math.PI * 2
                 );
-
 
                 ctx.fill();
 
@@ -384,13 +341,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         1
                     );
                 }
-
             }
         );
 
 
         ctx.globalAlpha = 1;
-
 
         requestAnimationFrame(
             animateFireworks
@@ -401,9 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function startCelebration() {
 
         fireworksRunning = true;
-
         particles = [];
-
 
         animateFireworks();
 
@@ -413,15 +366,12 @@ document.addEventListener("DOMContentLoaded", function () {
             celebrationSound.currentTime =
                 0;
 
-
             celebrationSound.play().catch(
                 function (error) {
-
                     console.log(
                         "Звук заблокирован браузером:",
                         error
                     );
-
                 }
             );
         }
@@ -434,7 +384,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     false;
 
                 particles = [];
-
 
                 ctx.clearRect(
                     0,
@@ -458,36 +407,30 @@ document.addEventListener("DOMContentLoaded", function () {
             "checkButton"
         );
 
-
     const nameInput =
         document.getElementById(
             "nameInput"
         );
-
 
     const modal =
         document.getElementById(
             "resultModal"
         );
 
-
     const closeModal =
         document.getElementById(
             "closeModal"
         );
-
 
     const resultImage =
         document.getElementById(
             "resultImage"
         );
 
-
     const resultImage2 =
         document.getElementById(
             "resultImage2"
         );
-
 
     const resultText =
         document.getElementById(
@@ -495,13 +438,16 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+    // =========================
+    // FUCK IMAGE
+    // =========================
+
     function hideFuckImage() {
 
         const fuckImage =
             document.getElementById(
                 "fuckImage"
             );
-
 
         if (fuckImage) {
 
@@ -512,12 +458,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =========================
-    // ВИДЕО
+    // ОБЫЧНЫЕ ВИДЕО
     // =========================
 
     function showSpecialVideo(videoFile) {
 
-        // Прячем обычные картинки
         resultImage.style.display =
             "none";
 
@@ -525,14 +470,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "none";
 
 
-        // Ищем старое видео
         let specialVideo =
             document.getElementById(
                 "specialVideo"
             );
 
 
-        // Если его ещё нет — создаём
         if (!specialVideo) {
 
             specialVideo =
@@ -543,34 +486,26 @@ document.addEventListener("DOMContentLoaded", function () {
             specialVideo.id =
                 "specialVideo";
 
-
             specialVideo.controls =
                 true;
-
 
             specialVideo.autoplay =
                 true;
 
-
             specialVideo.playsInline =
                 true;
-
 
             specialVideo.style.width =
                 "100%";
 
-
             specialVideo.style.maxWidth =
                 "700px";
-
 
             specialVideo.style.maxHeight =
                 "70vh";
 
-
             specialVideo.style.display =
                 "block";
-
 
             specialVideo.style.margin =
                 "0 auto";
@@ -581,7 +516,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     ".resultImages"
                 );
 
-
             resultImages.appendChild(
                 specialVideo
             );
@@ -591,23 +525,18 @@ document.addEventListener("DOMContentLoaded", function () {
         specialVideo.src =
             videoFile;
 
-
         specialVideo.style.display =
             "block";
-
 
         specialVideo.currentTime =
             0;
 
-
         specialVideo.play().catch(
             function (error) {
-
                 console.log(
                     "Видео не запустилось автоматически:",
                     error
                 );
-
             }
         );
     }
@@ -620,7 +549,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "specialVideo"
             );
 
-
         if (specialVideo) {
 
             specialVideo.pause();
@@ -631,6 +559,50 @@ document.addEventListener("DOMContentLoaded", function () {
             specialVideo.style.display =
                 "none";
         }
+    }
+
+
+    // =========================
+    // ИРИСКА
+    // =========================
+
+    function hideIriskVideo() {
+
+        const iriskaVideo =
+            document.getElementById(
+                "iriskaVideo"
+            );
+
+        if (iriskaVideo) {
+
+            iriskaVideo.pause();
+
+            iriskaVideo.currentTime =
+                0;
+
+            iriskaVideo.style.display =
+                "none";
+        }
+    }
+
+
+    function playIriskSound(file) {
+
+        const sound =
+            new Audio(file);
+
+        sound.currentTime = 0;
+
+        sound.play().catch(
+            function (error) {
+                console.log(
+                    "Звук Ириски не запустился:",
+                    error
+                );
+            }
+        );
+
+        return sound;
     }
 
 
@@ -647,15 +619,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     .trim()
                     .toLowerCase();
 
-            // Убираем стиль Еблан при новом результате
+
+            // Убираем стиль Еблан
             resultText.classList.remove(
                 "eblanText"
             );
 
-
             hideFuckImage();
-
             hideSpecialVideo();
+            hideIriskVideo();
 
 
             console.log(
@@ -731,14 +703,172 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-                // КНОПКУ НЕ ПОКАЗЫВАЕМ
                 sendPersonButton.style.display =
                     "none";
 
                 modal.style.display =
                     "flex";
 
-               
+                return;
+            }
+
+
+            // =========================
+            // ЗЛАЯ ИРИСКА
+            // =========================
+
+            // ВАЖНО:
+            // эта проверка стоит ДО regex,
+            // потому что здесь есть пробел.
+
+            if (name === "злая ириска") {
+
+                // Картинка Ириски
+                resultImage.src =
+                    "images/iriska.png";
+
+                resultImage.style.display =
+                    "block";
+
+                resultImage2.style.display =
+                    "none";
+
+                resultText.textContent =
+                    "";
+
+
+                // =========================
+                // ЗВУК IRISKA 1
+                // =========================
+
+                playIriskSound(
+                    "sounds/iriska1.mp3"
+                );
+
+
+                // =========================
+                // КНОПКА ПОГЛАДИТЬ
+                // =========================
+
+                sendPersonButton.textContent =
+                    "ПОГЛАДИТЬ";
+
+                sendPersonButton.style.display =
+                    "block";
+
+
+                sendPersonButton.onclick =
+                    function () {
+
+                        // =========================
+                        // ЗВУК IRISKA 2
+                        // =========================
+
+                        playIriskSound(
+                            "sounds/iriska2.mp3"
+                        );
+
+
+                        // Прячем картинку
+                        resultImage.style.display =
+                            "none";
+
+                        resultImage2.style.display =
+                            "none";
+
+
+                        // =========================
+                        // СОЗДАЁМ ВИДЕО
+                        // =========================
+
+                        let iriskaVideo =
+                            document.getElementById(
+                                "iriskaVideo"
+                            );
+
+
+                        if (!iriskaVideo) {
+
+                            iriskaVideo =
+                                document.createElement(
+                                    "video"
+                                );
+
+                            iriskaVideo.id =
+                                "iriskaVideo";
+
+                            iriskaVideo.src =
+                                "videos/iriska.mp4";
+
+                            iriskaVideo.controls =
+                                true;
+
+                            iriskaVideo.autoplay =
+                                true;
+
+                            iriskaVideo.playsInline =
+                                true;
+
+                            iriskaVideo.style.width =
+                                "100%";
+
+                            iriskaVideo.style.maxWidth =
+                                "700px";
+
+                            iriskaVideo.style.maxHeight =
+                                "70vh";
+
+                            iriskaVideo.style.display =
+                                "block";
+
+                            iriskaVideo.style.margin =
+                                "0 auto";
+
+
+                            const resultImages =
+                                document.querySelector(
+                                    ".resultImages"
+                                );
+
+                            if (resultImages) {
+
+                                resultImages.appendChild(
+                                    iriskaVideo
+                                );
+                            }
+                        }
+
+
+                        iriskaVideo.src =
+                            "videos/iriska.mp4";
+
+                        iriskaVideo.style.display =
+                            "block";
+
+                        iriskaVideo.currentTime =
+                            0;
+
+
+                        // Видео запускается после
+                        // нажатия кнопки
+                        iriskaVideo.play().catch(
+                            function (error) {
+                                console.log(
+                                    "Видео Ириски не запустилось:",
+                                    error
+                                );
+                            }
+                        );
+
+
+                        // Кнопку после нажатия убираем
+                        sendPersonButton.style.display =
+                            "none";
+                    };
+
+
+                modal.style.display =
+                    "flex";
 
                 return;
             }
@@ -765,14 +895,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-                // КНОПКУ НЕ ПОКАЗЫВАЕМ
                 sendPersonButton.style.display =
                     "none";
 
                 modal.style.display =
                     "flex";
-
-               
 
                 return;
             }
@@ -793,17 +920,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "ВЫ ЖИРНЫЙ СВИНКА";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -821,24 +944,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.src =
                     "images/lera2.jpg";
 
-
                 resultImage.style.display =
                     "block";
 
                 resultImage2.style.display =
                     "block";
 
-
                 resultText.textContent =
                     "ВЫ АЛЬТУШКА 10 ЛЕТ (ЖИРНАЯ)";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -863,19 +981,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
-
 
                 setupPersonButton(
                     "влад"
                 );
 
-
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -896,17 +1010,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -927,17 +1037,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -958,17 +1064,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -989,17 +1091,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1020,17 +1118,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1051,17 +1145,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1086,19 +1176,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
-
 
                 setupPersonButton(
                     "леша"
                 );
 
-
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1119,17 +1205,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1150,17 +1232,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1184,17 +1262,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1218,17 +1292,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultImage2.style.display =
                     "none";
 
-
                 resultText.textContent =
                     "";
 
-
                 setupPersonButton(name);
-
 
                 modal.style.display =
                     "flex";
-
 
                 startCelebration();
             }
@@ -1248,30 +1318,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         )
                     ];
 
-
                 resultImage.src =
                     randomImage;
-
 
                 resultImage.style.display =
                     "block";
 
-S
                 resultImage2.style.display =
                     "none";
-
 
                 resultText.textContent =
                     "";
 
-
+                // Именно ПОСЛАТЬ НАХУЙ,
+                // а не Telegram
                 setupPersonButton(
                     "__unknown__"
                 );
 
-
                 modal.style.display =
                     "flex";
+
                 startCelebration();
             }
 
@@ -1290,9 +1357,8 @@ S
             modal.style.display =
                 "none";
 
-
             hideSpecialVideo();
-
+            hideIriskVideo();
         }
     );
 
@@ -1312,23 +1378,19 @@ S
         function () {
 
             hideSpecialVideo();
-
+            hideIriskVideo();
 
             resultImage.src =
                 "images/pig1.jpg";
 
-
             resultImage.style.display =
                 "block";
-
 
             resultImage2.style.display =
                 "none";
 
-
             resultText.textContent =
                 "";
-
 
             if (sendPersonButton) {
 
@@ -1336,10 +1398,8 @@ S
                     "none";
             }
 
-
             modal.style.display =
                 "flex";
-
 
             startCelebration();
         }
@@ -1365,7 +1425,6 @@ S
                     "иди нахуй!!!"
                 );
 
-
             window.location.href =
                 "https://t.me/kl0ndaik?text=" +
                 message;
@@ -1382,18 +1441,15 @@ S
             "musicAudio"
         );
 
-
     const musicPlayButton =
         document.getElementById(
             "musicPlayButton"
         );
 
-
     const musicPlayIcon =
         document.getElementById(
             "musicPlayIcon"
         );
-
 
     const musicVolume =
         document.getElementById(
@@ -1401,9 +1457,7 @@ S
         );
 
 
-    // Количество треков
     const MUSIC_TRACK_COUNT = 20;
-
 
     const musicTracks = [];
 
@@ -1421,7 +1475,6 @@ S
 
 
     let currentMusicTrack = -1;
-
     let musicStarted = false;
 
 
@@ -1469,7 +1522,6 @@ S
         musicAudio.src =
             musicTracks[trackIndex];
 
-
         musicAudio.volume =
             musicVolume.value;
 
@@ -1483,7 +1535,6 @@ S
 
                     musicPlayIcon.textContent =
                         "Ⅱ";
-
                 }
             )
             .catch(
@@ -1493,7 +1544,6 @@ S
                         "Музыка не запустилась:",
                         error
                     );
-
                 }
             );
     }
@@ -1521,7 +1571,6 @@ S
 
                             musicPlayIcon.textContent =
                                 "Ⅱ";
-
                         }
                     )
                     .catch(
@@ -1531,10 +1580,8 @@ S
                                 "Не удалось продолжить:",
                                 error
                             );
-
                         }
                     );
-
             }
 
 
@@ -1543,11 +1590,9 @@ S
 
                 musicAudio.pause();
 
-
                 musicPlayIcon.textContent =
                     "▶";
             }
-
         }
     );
 
@@ -1567,8 +1612,49 @@ S
         function () {
 
             playRandomMusic();
-
         }
     );
+   // ======================
+// ЛИДЕРЫ
+// ======================
 
+const leadersButton = document.getElementById("leadersButton");
+const leadersModal = document.getElementById("leadersModal");
+const closeLeaders = document.getElementById("closeLeaders");
+
+if (leadersButton) {
+
+    leadersButton.addEventListener("click", function(){
+
+        leadersModal.style.display = "flex";
+
+    });
+
+}
+
+
+if (closeLeaders) {
+
+    closeLeaders.addEventListener("click", function(){
+
+        leadersModal.style.display = "none";
+
+    });
+
+}
+
+
+if (leadersModal) {
+
+    leadersModal.addEventListener("click", function(e){
+
+        if(e.target === leadersModal){
+
+            leadersModal.style.display = "none";
+
+        }
+
+    });
+
+}
 });

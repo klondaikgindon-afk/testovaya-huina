@@ -1,77 +1,329 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-   
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Кто ты по имени?</title>
+
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
+
 
 <body>
 
-    <main class="container">
-        <h1>Кто ты по имени????</h1>
 
-        <input
-            type="text"
-            id="nameInput"
-            placeholder="Введите имя"
-        >
+<main class="container">
 
-        <button id="checkButton">
-            ПРОВЕРИТЬ
-        </button>
 
-        <button id="telegramButton">
-            послать создателя нахуй
-        </button>
-        
+    <h1>
+        Кто ты по имени????
+    </h1>
 
-        <button id="secondButton">
-            Картинка свинки (бонус)
-        </button>
-    </main>
-    <div id="resultModal" class="modal">
-    <div class="modalContent">
 
-        <button id="closeModal" class="closeButton">×</button>
-
-        <div class="resultImages">
-            <img id="resultImage" src="" alt="Результат">
-            <img id="resultImage2" src="" alt="Результат">
-            
-</div>
-
-        <p id="resultText"></p>
-        <button id="sendPersonButton"></button>
-
-    </div>
-</div>
-<!-- Мурино FM -->
-<div id="musicPlayer">
 
     <input
-        type="range"
-        id="musicVolume"
-        min="0"
-        max="1"
-        step="0.01"
-        value="0.7"
+        type="text"
+        id="nameInput"
+        placeholder="Введите имя"
     >
 
-    <button id="musicPlayButton" aria-label="Мурино FM">
-        <span id="musicPlayIcon">▶</span>
+
+
+    
+
+
+
+    <button id="checkButton">
+        ПРОВЕРИТЬ
+    </button>
+    <button id="leadersButton" class="leaders-button">
+        Лидеры
     </button>
 
-    <span id="musicTitle">Мурино FM</span>
+
+
+    <button id="telegramButton">
+        послать создателя нахуй
+    </button>
+
+
+
+    <button id="secondButton">
+        Картинка свинки (бонус)
+    </button>
+
+
+</main>
+
+
+
+
+
+<!-- РЕЗУЛЬТАТ -->
+
+
+<div id="resultModal" class="modal">
+
+
+    <div class="modalContent">
+
+
+        <button 
+            id="closeModal" 
+            class="closeButton">
+            ×
+        </button>
+
+
+
+        <div class="resultImages">
+
+
+            <img 
+            id="resultImage" 
+            src="" 
+            alt="Результат">
+
+
+
+            <img 
+            id="resultImage2" 
+            src="" 
+            alt="Результат">
+
+
+        </div>
+
+
+
+        <p id="resultText"></p>
+
+
+
+        <button id="sendPersonButton">
+        </button>
+
+
+
+    </div>
+
 
 </div>
 
-<audio id="musicAudio" preload="auto"></audio>
-    <canvas id="fireworks"></canvas>
 
-<audio id="celebrationSound" src="sounds/ura.mp3" preload="auto"></audio>
+
+
+
+
+<!-- ЛИДЕРЫ -->
+
+
+<div id="leadersModal" class="leaders-modal">
+
+
+    <div class="leaders-panel">
+
+
+        <div class="crown">
+            👑
+        </div>
+
+
+
+        <h2>
+            Лидеры по посыланию
+            <br>
+            нахуй
+        </h2>
+
+
+
+        <div class="leaders-list">
+
+
+
+            <div class="leader-row">
+                <span>1. Егор</span>
+                <span>148</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>2. Влад</span>
+                <span>120</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>3. Леша</span>
+                <span>90</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>4. Никита</span>
+                <span>70</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>5. Артем</span>
+                <span>50</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>6. Рита</span>
+                <span>40</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>7. Лера</span>
+                <span>30</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>8. Макс</span>
+                <span>20</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>9. Артур</span>
+                <span>10</span>
+            </div>
+
+
+
+            <div class="leader-row">
+                <span>10. Глеб</span>
+                <span>5</span>
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <button id="closeLeaders">
+            Закрыть
+        </button>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- МУРИНО FM -->
+
+
+<div id="musicPlayer">
+
+
+    <input
+
+        type="range"
+
+        id="musicVolume"
+
+        min="0"
+
+        max="1"
+
+        step="0.01"
+
+        value="0.7"
+
+    >
+
+
+
+
+    <button 
+    id="musicPlayButton">
+
+        <span id="musicPlayIcon">
+            ▶
+        </span>
+
+    </button>
+
+
+
+
+    <span id="musicTitle">
+        Мурино FM
+    </span>
+
+
+
+</div>
+
+
+
+
+
+<audio 
+id="musicAudio" 
+preload="auto">
+</audio>
+
+
+
+
+
+<!-- ФЕЙЕРВЕРК -->
+
+
+<canvas id="fireworks"></canvas>
+
+
+
+
+
+<audio 
+id="celebrationSound" 
+src="sounds/ura.mp3" 
+preload="auto">
+</audio>
+
+
+
+
+
+
+
 <script src="script.js"></script>
+
+
 </body>
+
 </html>
