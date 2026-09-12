@@ -48,8 +48,27 @@
 
     </div>
 </div>
+<!-- Мурино FM -->
+<div id="musicPlayer">
 
-    
+    <input
+        type="range"
+        id="musicVolume"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.7"
+    >
+
+    <button id="musicPlayButton" aria-label="Мурино FM">
+        <span id="musicPlayIcon">▶</span>
+    </button>
+
+    <span id="musicTitle">Мурино FM</span>
+
+</div>
+
+<audio id="musicAudio" preload="auto"></audio>
     <canvas id="fireworks"></canvas>
 
 <audio id="celebrationSound" src="sounds/ura.mp3" preload="auto"></audio>
