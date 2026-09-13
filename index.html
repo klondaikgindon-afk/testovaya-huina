@@ -9,11 +9,9 @@
 
     <title>Кто ты по имени?</title>
 
-
     <link rel="stylesheet" href="style.css">
 
 </head>
-
 
 
 <body>
@@ -27,7 +25,6 @@
     </h1>
 
 
-
     <input
         type="text"
         id="nameInput"
@@ -35,24 +32,19 @@
     >
 
 
-
-    
-
-
-
     <button id="checkButton">
         ПРОВЕРИТЬ
     </button>
+
+
     <button id="leadersButton" class="leaders-button">
         Лидеры
     </button>
 
 
-
     <button id="telegramButton">
         послать создателя нахуй
     </button>
-
 
 
     <button id="secondButton">
@@ -63,70 +55,55 @@
 </main>
 
 
-
-
-
-<!-- РЕЗУЛЬТАТ -->
-
+<!-- =========================
+     РЕЗУЛЬТАТ
+========================= -->
 
 <div id="resultModal" class="modal">
 
-
     <div class="modalContent">
 
-
-        <button 
-            id="closeModal" 
+        <button
+            id="closeModal"
             class="closeButton">
             ×
         </button>
 
 
-
         <div class="resultImages">
 
+            <img
+                id="resultImage"
+                src=""
+                alt="Результат"
+            >
 
-            <img 
-            id="resultImage" 
-            src="" 
-            alt="Результат">
-
-
-
-            <img 
-            id="resultImage2" 
-            src="" 
-            alt="Результат">
-
+            <img
+                id="resultImage2"
+                src=""
+                alt="Результат"
+            >
 
         </div>
 
 
-
         <p id="resultText"></p>
-
 
 
         <button id="sendPersonButton">
         </button>
 
 
-
     </div>
-
 
 </div>
 
 
-
-
-
-
-<!-- ЛИДЕРЫ -->
-
+<!-- =========================
+     ЛИДЕРЫ
+========================= -->
 
 <div id="leadersModal" class="leaders-modal">
-
 
     <div class="leaders-panel">
 
@@ -136,7 +113,6 @@
         </div>
 
 
-
         <h2>
             Лидеры по посыланию
             <br>
@@ -144,84 +120,12 @@
         </h2>
 
 
+        <!--
+            СЮДА JAVASCRIPT САМ ЗАГРУЗИТ
+            НАСТОЯЩИХ ЛИДЕРОВ ИЗ FIREBASE
+        -->
 
-        <div class="leaders-list">
-
-
-
-            <div class="leader-row">
-                <span>1. Егор</span>
-                <span>148</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>2. Влад</span>
-                <span>120</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>3. Леша</span>
-                <span>90</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>4. Никита</span>
-                <span>70</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>5. Артем</span>
-                <span>50</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>6. Рита</span>
-                <span>40</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>7. Лера</span>
-                <span>30</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>8. Макс</span>
-                <span>20</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>9. Артур</span>
-                <span>10</span>
-            </div>
-
-
-
-            <div class="leader-row">
-                <span>10. Глеб</span>
-                <span>5</span>
-            </div>
-
-
-
-        </div>
-
-
+        <div class="leaders-list"></div>
 
 
         <button id="closeLeaders">
@@ -229,46 +133,29 @@
         </button>
 
 
-
     </div>
-
 
 </div>
 
 
-
-
-
-
-
-
-<!-- МУРИНО FM -->
-
+<!-- =========================
+     МУРИНО FM
+========================= -->
 
 <div id="musicPlayer">
 
 
     <input
-
         type="range"
-
         id="musicVolume"
-
         min="0"
-
         max="1"
-
         step="0.01"
-
         value="0.7"
-
     >
 
 
-
-
-    <button 
-    id="musicPlayButton">
+    <button id="musicPlayButton">
 
         <span id="musicPlayIcon">
             ▶
@@ -277,49 +164,78 @@
     </button>
 
 
-
-
     <span id="musicTitle">
         Мурино FM
     </span>
 
 
-
 </div>
 
 
-
-
-
-<audio 
-id="musicAudio" 
-preload="auto">
+<audio
+    id="musicAudio"
+    preload="auto">
 </audio>
 
 
-
-
-
-<!-- ФЕЙЕРВЕРК -->
-
+<!-- =========================
+     ФЕЙЕРВЕРК
+========================= -->
 
 <canvas id="fireworks"></canvas>
 
 
-
-
-
-<audio 
-id="celebrationSound" 
-src="sounds/ura.mp3" 
-preload="auto">
+<audio
+    id="celebrationSound"
+    src="sounds/ura.mp3"
+    preload="auto">
 </audio>
 
 
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database-compat.js"></script>
 
 
+<script>
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDQArrh3GiW3YZvzyDJSBQbQS4ZqjSUFHs",
+
+    authDomain: "poslat-nahui-top.firebaseapp.com",
+
+    databaseURL: "https://poslat-nahui-top-default-rtdb.europe-west1.firebasedatabase.app",
+
+    projectId: "poslat-nahui-top",
+
+    storageBucket: "poslat-nahui-top.firebasestorage.app",
+
+    messagingSenderId: "53490826523",
+
+    appId: "1:53490826523:web:715d04b449376b205967be",
+
+    measurementId: "G-741CEH2XNT"
+
+};
 
 
+firebase.initializeApp(firebaseConfig);
+
+
+const database =
+    firebase.database();
+
+</script>
+
+
+<!-- =========================
+     ТВОЙ JAVASCRIPT
+========================= -->
 
 <script src="script.js"></script>
 

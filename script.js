@@ -1,5 +1,13 @@
 console.log("НОВЫЙ SCRIPT ЗАГРУЖЕН");
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    // =========================
+    // FIREBASE ЛИДЕРЫ
+    // =========================
+
+    const leadersRef = firebase.database().ref("leaders");
+
 
     // =========================
     // СЛУЧАЙНЫЕ КАРТИНКИ
@@ -28,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "андрей": "Bananoviysochok"
     };
 
+
     const sendPersonButton =
         document.getElementById("sendPersonButton");
 
@@ -48,6 +57,129 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =========================
+    // ДОБАВИТЬ +1 В ЛИДЕРЫ
+    // =========================
+
+    function addLeaderPoint(name) {
+
+        if (!name || name === "__unknown__") {
+            return;
+        }
+
+        const leaderRef =
+            firebase.database().ref(
+                "leaders/" + name
+            );
+
+        leaderRef.transaction(function (currentValue) {
+
+            return (currentValue || 0) + 1;
+
+        }).catch(function (error) {
+
+            console.error(
+                "Ошибка Firebase:",
+                error
+            );
+
+        });
+    }
+
+
+    // =========================
+    // ОТОБРАЖЕНИЕ ЛИДЕРОВ
+    // =========================
+
+    const leadersList =
+        document.querySelector(".leaders-list");
+
+
+    const leaderDisplayNames = {
+        "егор": "Егор",
+        "леша": "Леша",
+        "влад": "Влад",
+        "глеб": "Глеб",
+        "артур": "Артур",
+        "денис": "Денис",
+        "лев": "Лев",
+        "вадим": "Вадим",
+        "андрей": "Андрей",
+
+        "никита": "Никита",
+        "лера": "Лера",
+        "рита": "Рита",
+        "макс": "Макс",
+        "артем": "Артем"
+    };
+
+
+    leadersRef.on("value", function (snapshot) {
+
+        if (!leadersList) {
+            return;
+        }
+
+        const data =
+            snapshot.val() || {};
+
+
+        const entries =
+            Object.entries(data);
+
+
+        entries.sort(function (a, b) {
+            return b[1] - a[1];
+        });
+
+
+        leadersList.innerHTML = "";
+
+
+        entries.forEach(function (entry, index) {
+
+            const name = entry[0];
+            const count = entry[1];
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "leader-row";
+
+
+            const displayName =
+                leaderDisplayNames[name] || name;
+
+
+            row.innerHTML =
+                "<span>" +
+                (index + 1) +
+                ". " +
+                displayName +
+                "</span>" +
+
+                "<span>" +
+                count +
+                "</span>";
+
+
+            leadersList.appendChild(row);
+        });
+
+
+        if (entries.length === 0) {
+
+            leadersList.innerHTML =
+                "<div class=\"leader-row\">" +
+                "<span>Пока никто</span>" +
+                "<span>0</span>" +
+                "</div>";
+        }
+
+    });
+
+
+    // =========================
     // КНОПКА ПОСЛАТЬ НАХУЙ
     // =========================
 
@@ -57,7 +189,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Специальная кнопка
+
+        // =========================
+        // СПЕЦИАЛЬНАЯ КНОПКА
+        // =========================
+
         if (
             specialNames.includes(name) ||
             name === "__unknown__"
@@ -69,16 +205,30 @@ document.addEventListener("DOMContentLoaded", function () {
             sendPersonButton.style.display =
                 "block";
 
+
             sendPersonButton.onclick =
                 function () {
 
+                    // Если это настоящее имя —
+                    // добавляем +1
+
+                    if (name !== "__unknown__") {
+                        addLeaderPoint(name);
+                    }
+
+
                     let fuckImage =
-                        document.getElementById("fuckImage");
+                        document.getElementById(
+                            "fuckImage"
+                        );
+
 
                     if (!fuckImage) {
 
                         fuckImage =
-                            document.createElement("img");
+                            document.createElement(
+                                "img"
+                            );
 
                         fuckImage.id =
                             "fuckImage";
@@ -89,35 +239,49 @@ document.addEventListener("DOMContentLoaded", function () {
                         fuckImage.alt =
                             "FUCK";
 
+
                         const resultImages =
-                            document.querySelector(".resultImages");
+                            document.querySelector(
+                                ".resultImages"
+                            );
+
 
                         if (resultImages) {
+
                             resultImages.appendChild(
                                 fuckImage
                             );
                         }
                     }
 
+
                     fuckImage.style.display =
                         "block";
+
 
                     const fuckSound =
                         new Audio(
                             "sounds/FUCK.mp3"
                         );
 
-                    fuckSound.currentTime = 0;
+
+                    fuckSound.currentTime =
+                        0;
+
 
                     fuckSound.play().catch(
                         function (error) {
+
                             console.log(
                                 "Звук заблокирован браузером:",
                                 error
                             );
+
                         }
                     );
+
                 };
+
 
             return;
         }
@@ -130,6 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const username =
             telegramPeople[name];
 
+
         if (!username) {
 
             sendPersonButton.style.display =
@@ -138,7 +303,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+
         const displayNames = {
+
             "егор": "Егора",
             "леша": "Лешу",
             "влад": "Влада",
@@ -148,30 +315,42 @@ document.addEventListener("DOMContentLoaded", function () {
             "лев": "Льва",
             "вадим": "Вадима",
             "андрей": "Андрея"
+
         };
+
 
         sendPersonButton.textContent =
             "послать " +
             displayNames[name] +
             " нахуй";
 
+
         sendPersonButton.style.display =
             "block";
 
+
         sendPersonButton.onclick =
             function () {
+
+                // Сначала +1 в Firebase
+
+                addLeaderPoint(name);
+
 
                 const message =
                     encodeURIComponent(
                         "иди нахуй!!!"
                     );
 
+
                 window.location.href =
                     "https://t.me/" +
                     username +
                     "?text=" +
                     message;
+
             };
+
     }
 
 
@@ -185,10 +364,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const ctx =
         canvas.getContext("2d");
 
+
     const celebrationSound =
         document.getElementById(
             "celebrationSound"
         );
+
 
     let particles = [];
     let fireworksRunning = false;
@@ -201,10 +382,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         canvas.height =
             window.innerHeight;
+
     }
 
 
     resizeCanvas();
+
 
     window.addEventListener(
         "resize",
@@ -218,12 +401,15 @@ document.addEventListener("DOMContentLoaded", function () {
             Math.random() *
             canvas.width;
 
+
         const y =
             Math.random() *
             canvas.height *
             0.55;
 
+
         const colors = [
+
             "#ff0000",
             "#00ff00",
             "#00aaff",
@@ -231,7 +417,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "#ff00ff",
             "#ffffff",
             "#ff8800"
+
         ];
+
 
         const color =
             colors[
@@ -249,28 +437,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 Math.PI *
                 2;
 
+
             const speed =
                 Math.random() *
                 7 +
                 2;
 
+
             particles.push({
+
                 x: x,
                 y: y,
+
                 vx:
                     Math.cos(angle) *
                     speed,
+
                 vy:
                     Math.sin(angle) *
                     speed,
+
                 life: 100,
+
                 color: color,
+
                 size:
                     Math.random() *
                     3 +
                     1
+
             });
+
         }
+
     }
 
 
@@ -287,6 +486,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             return;
         }
+
 
         ctx.clearRect(
             0,
@@ -315,13 +515,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 particle.life--;
 
+
                 ctx.globalAlpha =
                     particle.life / 100;
+
 
                 ctx.fillStyle =
                     particle.color;
 
+
                 ctx.beginPath();
+
 
                 ctx.arc(
                     particle.x,
@@ -330,6 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     0,
                     Math.PI * 2
                 );
+
 
                 ctx.fill();
 
@@ -340,23 +545,29 @@ document.addEventListener("DOMContentLoaded", function () {
                         index,
                         1
                     );
+
                 }
+
             }
         );
 
 
         ctx.globalAlpha = 1;
 
+
         requestAnimationFrame(
             animateFireworks
         );
+
     }
 
 
     function startCelebration() {
 
         fireworksRunning = true;
+
         particles = [];
+
 
         animateFireworks();
 
@@ -366,14 +577,18 @@ document.addEventListener("DOMContentLoaded", function () {
             celebrationSound.currentTime =
                 0;
 
+
             celebrationSound.play().catch(
                 function (error) {
+
                     console.log(
                         "Звук заблокирован браузером:",
                         error
                     );
+
                 }
             );
+
         }
 
 
@@ -385,6 +600,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 particles = [];
 
+
                 ctx.clearRect(
                     0,
                     0,
@@ -395,6 +611,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             5000
         );
+
     }
 
 
@@ -407,30 +624,36 @@ document.addEventListener("DOMContentLoaded", function () {
             "checkButton"
         );
 
+
     const nameInput =
         document.getElementById(
             "nameInput"
         );
+
 
     const modal =
         document.getElementById(
             "resultModal"
         );
 
+
     const closeModal =
         document.getElementById(
             "closeModal"
         );
+
 
     const resultImage =
         document.getElementById(
             "resultImage"
         );
 
+
     const resultImage2 =
         document.getElementById(
             "resultImage2"
         );
+
 
     const resultText =
         document.getElementById(
@@ -449,11 +672,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 "fuckImage"
             );
 
+
         if (fuckImage) {
 
             fuckImage.style.display =
                 "none";
+
         }
+
     }
 
 
@@ -483,29 +709,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     "video"
                 );
 
+
             specialVideo.id =
                 "specialVideo";
+
 
             specialVideo.controls =
                 true;
 
+
             specialVideo.autoplay =
                 true;
+
 
             specialVideo.playsInline =
                 true;
 
+
             specialVideo.style.width =
                 "100%";
+
 
             specialVideo.style.maxWidth =
                 "700px";
 
+
             specialVideo.style.maxHeight =
                 "70vh";
 
+
             specialVideo.style.display =
                 "block";
+
 
             specialVideo.style.margin =
                 "0 auto";
@@ -516,29 +751,37 @@ document.addEventListener("DOMContentLoaded", function () {
                     ".resultImages"
                 );
 
+
             resultImages.appendChild(
                 specialVideo
             );
+
         }
 
 
         specialVideo.src =
             videoFile;
 
+
         specialVideo.style.display =
             "block";
+
 
         specialVideo.currentTime =
             0;
 
+
         specialVideo.play().catch(
             function (error) {
+
                 console.log(
                     "Видео не запустилось автоматически:",
                     error
                 );
+
             }
         );
+
     }
 
 
@@ -549,6 +792,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "specialVideo"
             );
 
+
         if (specialVideo) {
 
             specialVideo.pause();
@@ -558,7 +802,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             specialVideo.style.display =
                 "none";
+
         }
+
     }
 
 
@@ -573,6 +819,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "iriskaVideo"
             );
 
+
         if (iriskaVideo) {
 
             iriskaVideo.pause();
@@ -582,7 +829,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             iriskaVideo.style.display =
                 "none";
+
         }
+
     }
 
 
@@ -591,18 +840,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const sound =
             new Audio(file);
 
-        sound.currentTime = 0;
+
+        sound.currentTime =
+            0;
+
 
         sound.play().catch(
             function (error) {
+
                 console.log(
                     "Звук Ириски не запустился:",
                     error
                 );
+
             }
         );
 
+
         return sound;
+
     }
 
 
@@ -620,13 +876,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     .toLowerCase();
 
 
-            // Убираем стиль Еблан
             resultText.classList.remove(
                 "eblanText"
             );
 
+
             hideFuckImage();
+
             hideSpecialVideo();
+
             hideIriskVideo();
 
 
@@ -645,18 +903,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "";
 
+
                 setupPersonButton(
                     "__unknown__"
                 );
+
 
                 showSpecialVideo(
                     "videos/video1.mp4"
                 );
 
+
                 modal.style.display =
                     "flex";
 
+
                 return;
+
             }
 
 
@@ -669,18 +932,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "";
 
+
                 setupPersonButton(
                     "__unknown__"
                 );
+
 
                 showSpecialVideo(
                     "videos/video2.mp4"
                 );
 
+
                 modal.style.display =
                     "flex";
 
+
                 return;
+
             }
 
 
@@ -693,23 +961,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "Еблан?";
 
+
                 resultText.classList.add(
                     "eblanText"
                 );
 
+
                 resultImage.style.display =
                     "none";
+
 
                 resultImage2.style.display =
                     "none";
 
+
                 sendPersonButton.style.display =
                     "none";
+
 
                 modal.style.display =
                     "flex";
 
+
                 return;
+
             }
 
 
@@ -717,41 +992,32 @@ document.addEventListener("DOMContentLoaded", function () {
             // ЗЛАЯ ИРИСКА
             // =========================
 
-            // ВАЖНО:
-            // эта проверка стоит ДО regex,
-            // потому что здесь есть пробел.
-
             if (name === "злая ириска") {
 
-                // Картинка Ириски
                 resultImage.src =
                     "images/iriska.png";
+
 
                 resultImage.style.display =
                     "block";
 
+
                 resultImage2.style.display =
                     "none";
+
 
                 resultText.textContent =
                     "";
 
-
-                // =========================
-                // ЗВУК IRISKA 1
-                // =========================
 
                 playIriskSound(
                     "sounds/iriska1.mp3"
                 );
 
 
-                // =========================
-                // КНОПКА ПОГЛАДИТЬ
-                // =========================
-
                 sendPersonButton.textContent =
                     "ПОГЛАДИТЬ";
+
 
                 sendPersonButton.style.display =
                     "block";
@@ -760,26 +1026,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 sendPersonButton.onclick =
                     function () {
 
-                        // =========================
-                        // ЗВУК IRISKA 2
-                        // =========================
-
                         playIriskSound(
                             "sounds/iriska2.mp3"
                         );
 
 
-                        // Прячем картинку
                         resultImage.style.display =
                             "none";
+
 
                         resultImage2.style.display =
                             "none";
 
-
-                        // =========================
-                        // СОЗДАЁМ ВИДЕО
-                        // =========================
 
                         let iriskaVideo =
                             document.getElementById(
@@ -794,32 +1052,42 @@ document.addEventListener("DOMContentLoaded", function () {
                                     "video"
                                 );
 
+
                             iriskaVideo.id =
                                 "iriskaVideo";
+
 
                             iriskaVideo.src =
                                 "videos/iriska.mp4";
 
+
                             iriskaVideo.controls =
                                 true;
+
 
                             iriskaVideo.autoplay =
                                 true;
 
+
                             iriskaVideo.playsInline =
                                 true;
+
 
                             iriskaVideo.style.width =
                                 "100%";
 
+
                             iriskaVideo.style.maxWidth =
                                 "700px";
+
 
                             iriskaVideo.style.maxHeight =
                                 "70vh";
 
+
                             iriskaVideo.style.display =
                                 "block";
+
 
                             iriskaVideo.style.margin =
                                 "0 auto";
@@ -830,54 +1098,59 @@ document.addEventListener("DOMContentLoaded", function () {
                                     ".resultImages"
                                 );
 
+
                             if (resultImages) {
 
                                 resultImages.appendChild(
                                     iriskaVideo
                                 );
+
                             }
+
                         }
 
 
                         iriskaVideo.src =
                             "videos/iriska.mp4";
 
+
                         iriskaVideo.style.display =
                             "block";
+
 
                         iriskaVideo.currentTime =
                             0;
 
 
-                        // Видео запускается после
-                        // нажатия кнопки
                         iriskaVideo.play().catch(
                             function (error) {
+
                                 console.log(
                                     "Видео Ириски не запустилось:",
                                     error
                                 );
+
                             }
                         );
 
 
-                        // Кнопку после нажатия убираем
                         sendPersonButton.style.display =
                             "none";
+
                     };
 
 
                 modal.style.display =
                     "flex";
 
+
                 return;
+
             }
 
 
             // =========================
             // ПРОВЕРКА ВВОДА
-            // Только русские буквы
-            // Одно слово
             // =========================
 
             if (!/^[а-яё]+$/i.test(name)) {
@@ -885,23 +1158,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "Еблан?";
 
+
                 resultText.classList.add(
                     "eblanText"
                 );
 
+
                 resultImage.style.display =
                     "none";
+
 
                 resultImage2.style.display =
                     "none";
 
+
                 sendPersonButton.style.display =
                     "none";
+
 
                 modal.style.display =
                     "flex";
 
+
                 return;
+
             }
 
 
@@ -929,6 +1209,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -959,6 +1240,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -992,6 +1274,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1019,6 +1302,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1046,6 +1330,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1073,6 +1358,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1100,6 +1386,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1127,6 +1414,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1154,6 +1442,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1187,6 +1476,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1214,6 +1504,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1241,6 +1532,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1265,12 +1557,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "";
 
-                setupPersonButton(name);
+                // Для обоих вариантов
+                // записываем в одного Артема
+
+                setupPersonButton(
+                    "артем"
+                );
 
                 modal.style.display =
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1295,12 +1593,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultText.textContent =
                     "";
 
-                setupPersonButton(name);
+                setupPersonButton(
+                    "макс"
+                );
 
                 modal.style.display =
                     "flex";
 
                 startCelebration();
+
             }
 
 
@@ -1318,28 +1619,111 @@ document.addEventListener("DOMContentLoaded", function () {
                         )
                     ];
 
+
                 resultImage.src =
                     randomImage;
+
 
                 resultImage.style.display =
                     "block";
 
+
                 resultImage2.style.display =
                     "none";
+
 
                 resultText.textContent =
                     "";
 
-                // Именно ПОСЛАТЬ НАХУЙ,
-                // а не Telegram
+
                 setupPersonButton(
                     "__unknown__"
                 );
 
+
+                // Для неизвестного имени
+                // тоже будем считать его,
+                // но именно под введенным именем
+
+                sendPersonButton.onclick =
+                    function () {
+
+                        addLeaderPoint(name);
+
+
+                        let fuckImage =
+                            document.getElementById(
+                                "fuckImage"
+                            );
+
+
+                        if (!fuckImage) {
+
+                            fuckImage =
+                                document.createElement(
+                                    "img"
+                                );
+
+
+                            fuckImage.id =
+                                "fuckImage";
+
+
+                            fuckImage.src =
+                                "images/fuck.png";
+
+
+                            fuckImage.alt =
+                                "FUCK";
+
+
+                            const resultImages =
+                                document.querySelector(
+                                    ".resultImages"
+                                );
+
+
+                            if (resultImages) {
+
+                                resultImages.appendChild(
+                                    fuckImage
+                                );
+
+                            }
+
+                        }
+
+
+                        fuckImage.style.display =
+                            "block";
+
+
+                        const fuckSound =
+                            new Audio(
+                                "sounds/FUCK.mp3"
+                            );
+
+
+                        fuckSound.play().catch(
+                            function (error) {
+
+                                console.log(
+                                    "Звук заблокирован:",
+                                    error
+                                );
+
+                            }
+                        );
+
+                    };
+
+
                 modal.style.display =
                     "flex";
 
+
                 startCelebration();
+
             }
 
         }
@@ -1357,8 +1741,11 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display =
                 "none";
 
+
             hideSpecialVideo();
+
             hideIriskVideo();
+
         }
     );
 
@@ -1373,37 +1760,30 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    secondButton.addEventListener(
-        "click",
-        function () {
+    secondButton.addEventListener("click", function () {
+    hideSpecialVideo();
+    hideIriskVideo();
 
-            hideSpecialVideo();
-            hideIriskVideo();
+    resultImage.src = "images/pig1.jpg";
+    resultImage.style.display = "block";
+    resultImage2.style.display = "none";
 
-            resultImage.src =
-                "images/pig1.jpg";
+    resultText.textContent = "";
 
-            resultImage.style.display =
-                "block";
+    // Убираем FUCK, если он остался от предыдущего результата
+    const fuckImage = document.getElementById("fuckImage");
+    if (fuckImage) {
+        fuckImage.style.display = "none";
+    }
 
-            resultImage2.style.display =
-                "none";
+    if (sendPersonButton) {
+        sendPersonButton.style.display = "none";
+    }
 
-            resultText.textContent =
-                "";
+    modal.style.display = "flex";
 
-            if (sendPersonButton) {
-
-                sendPersonButton.style.display =
-                    "none";
-            }
-
-            modal.style.display =
-                "flex";
-
-            startCelebration();
-        }
-    );
+    // ВАЖНО: тут больше нет startCelebration()
+});
 
 
     // =========================
@@ -1425,9 +1805,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     "иди нахуй!!!"
                 );
 
+
             window.location.href =
                 "https://t.me/kl0ndaik?text=" +
                 message;
+
         }
     );
 
@@ -1441,15 +1823,18 @@ document.addEventListener("DOMContentLoaded", function () {
             "musicAudio"
         );
 
+
     const musicPlayButton =
         document.getElementById(
             "musicPlayButton"
         );
 
+
     const musicPlayIcon =
         document.getElementById(
             "musicPlayIcon"
         );
+
 
     const musicVolume =
         document.getElementById(
@@ -1471,10 +1856,12 @@ document.addEventListener("DOMContentLoaded", function () {
         musicTracks.push(
             "music/" + i + ".mp3"
         );
+
     }
 
 
     let currentMusicTrack = -1;
+
     let musicStarted = false;
 
 
@@ -1499,6 +1886,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         return randomIndex;
+
     }
 
 
@@ -1507,7 +1895,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (
             musicTracks.length === 0
         ) {
+
             return;
+
         }
 
 
@@ -1522,6 +1912,7 @@ document.addEventListener("DOMContentLoaded", function () {
         musicAudio.src =
             musicTracks[trackIndex];
 
+
         musicAudio.volume =
             musicVolume.value;
 
@@ -1533,8 +1924,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     musicStarted =
                         true;
 
+
                     musicPlayIcon.textContent =
                         "Ⅱ";
+
                 }
             )
             .catch(
@@ -1544,8 +1937,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         "Музыка не запустилась:",
                         error
                     );
+
                 }
             );
+
     }
 
 
@@ -1553,16 +1948,15 @@ document.addEventListener("DOMContentLoaded", function () {
         "click",
         function () {
 
-            // Первый запуск
             if (!musicStarted) {
 
                 playRandomMusic();
 
                 return;
+
             }
 
 
-            // Музыка стоит на паузе
             if (musicAudio.paused) {
 
                 musicAudio.play()
@@ -1571,6 +1965,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                             musicPlayIcon.textContent =
                                 "Ⅱ";
+
                         }
                     )
                     .catch(
@@ -1580,19 +1975,22 @@ document.addEventListener("DOMContentLoaded", function () {
                                 "Не удалось продолжить:",
                                 error
                             );
+
                         }
                     );
+
             }
 
 
-            // Музыка играет
             else {
 
                 musicAudio.pause();
 
                 musicPlayIcon.textContent =
                     "▶";
+
             }
+
         }
     );
 
@@ -1603,6 +2001,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             musicAudio.volume =
                 musicVolume.value;
+
         }
     );
 
@@ -1612,49 +2011,81 @@ document.addEventListener("DOMContentLoaded", function () {
         function () {
 
             playRandomMusic();
+
         }
     );
-   // ======================
-// ЛИДЕРЫ
-// ======================
-
-const leadersButton = document.getElementById("leadersButton");
-const leadersModal = document.getElementById("leadersModal");
-const closeLeaders = document.getElementById("closeLeaders");
-
-if (leadersButton) {
-
-    leadersButton.addEventListener("click", function(){
-
-        leadersModal.style.display = "flex";
-
-    });
-
-}
 
 
-if (closeLeaders) {
+    // =========================
+    // ЛИДЕРЫ — ОТКРЫТИЕ
+    // =========================
 
-    closeLeaders.addEventListener("click", function(){
-
-        leadersModal.style.display = "none";
-
-    });
-
-}
+    const leadersButton =
+        document.getElementById(
+            "leadersButton"
+        );
 
 
-if (leadersModal) {
+    const leadersModal =
+        document.getElementById(
+            "leadersModal"
+        );
 
-    leadersModal.addEventListener("click", function(e){
 
-        if(e.target === leadersModal){
+    const closeLeaders =
+        document.getElementById(
+            "closeLeaders"
+        );
 
-            leadersModal.style.display = "none";
 
-        }
+    if (leadersButton) {
 
-    });
+        leadersButton.addEventListener(
+            "click",
+            function () {
 
-}
+                leadersModal.style.display =
+                    "flex";
+
+            }
+        );
+
+    }
+
+
+    if (closeLeaders) {
+
+        closeLeaders.addEventListener(
+            "click",
+            function () {
+
+                leadersModal.style.display =
+                    "none";
+
+            }
+        );
+
+    }
+
+
+    if (leadersModal) {
+
+        leadersModal.addEventListener(
+            "click",
+            function (e) {
+
+                if (
+                    e.target === leadersModal
+                ) {
+
+                    leadersModal.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+
 });

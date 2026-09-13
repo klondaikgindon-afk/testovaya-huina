@@ -16,11 +16,9 @@ body {
 .container {
     min-height: 100vh;
     position: relative;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding-top: 60px;
 }
 
@@ -33,12 +31,9 @@ h1 {
 #nameInput {
     width: 330px;
     height: 80px;
-
     padding: 0 20px;
-
     border: none;
     outline: none;
-
     background: white;
     font-size: 28px;
 }
@@ -47,42 +42,55 @@ h1 {
     color: #333;
 }
 
-/* КНОПКА ПРОВЕРИТЬ */
+
+/* ==================================================
+   КНОПКА ПРОВЕРИТЬ — ПК
+   ================================================== */
 
 #checkButton {
     position: absolute;
-
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-
     width: 100px;
     height: 500px;
-
     border: none;
     background: #a64f73;
     color: white;
-
     font-size: 28px;
     font-weight: normal;
-
     writing-mode: vertical-rl;
     text-orientation: upright;
-
     cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-/* КНОПКА СВИНКИ */
+#checkButton:hover {
+    transform: translateY(-50%) scale(1.05);
+    background: #b85b80;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+#checkButton:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==================================================
+   КНОПКА СВИНКИ
+   ================================================== */
 
 #secondButton {
     position: absolute;
-
     right: 25px;
     bottom: 30px;
-
     width: 190px;
     min-height: 100px;
-
     padding: 15px 20px;
 
     border: none;
@@ -93,13 +101,31 @@ h1 {
     line-height: 1.2;
 
     cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-/* TELEGRAM */
+#secondButton:hover {
+    transform: scale(1.05);
+    background: #b85b80;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+#secondButton:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==================================================
+   TELEGRAM
+   ================================================== */
 
 #telegramButton {
     display: block;
-
     margin: 30px auto 0;
 
     padding: 12px 30px;
@@ -116,58 +142,29 @@ h1 {
     cursor: pointer;
 
     transition:
-        transform 0.2s,
-        background 0.2s;
-}
-
-#telegramButton:hover {
-    transform: scale(1.05);
-    background: #168AC0;
-}
-
-#telegramButton:active {
-    transform: scale(0.97);
-}
-
-/* Анимация основных кнопок */
-#checkButton,
-#secondButton,
-#telegramButton {
-    transition:
         transform 0.2s ease,
         background 0.2s ease,
         box-shadow 0.2s ease;
 }
 
-#checkButton:hover {
-    transform: translateY(-50%) scale(1.05);
-    background: #b85b80;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-
-#secondButton:hover,
 #telegramButton:hover {
     transform: scale(1.05);
-    background: #b85b80;
+    background: #168AC0;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-#checkButton:active {
-    transform: translateY(-50%) scale(0.95);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
-#secondButton:active,
 #telegramButton:active {
     transform: scale(0.97);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* ОКНО РЕЗУЛЬТАТА */
+
+/* ==================================================
+   ОКНО РЕЗУЛЬТАТА
+   ================================================== */
 
 .modal {
     display: none;
-
     position: fixed;
     inset: 0;
 
@@ -181,18 +178,19 @@ h1 {
 
 .modalContent {
     position: relative;
-
     width: min(90vw, 700px);
-
     text-align: center;
 }
 
 .resultImages {
+    position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .resultImages img {
@@ -200,7 +198,6 @@ h1 {
     height: 500px;
 
     object-fit: cover;
-
     display: block;
 }
 
@@ -233,20 +230,22 @@ h1 {
 
     border: none;
     background: transparent;
-
     color: white;
 
     font-size: 40px;
 
     cursor: pointer;
-
     z-index: 3;
 }
 
-/* ФЕЙЕРВЕРК */
+
+/* ==================================================
+   ФЕЙЕРВЕРК
+   ================================================== */
 
 #fireworks {
     position: fixed;
+
     inset: 0;
 
     width: 100vw;
@@ -257,123 +256,15 @@ h1 {
     z-index: 999999;
 }
 
-/* =========================
-   ПК
-   ========================= */
 
-@media screen and (min-width: 768px) {
+/* ==================================================
+   КНОПКА ПОСЛАТЬ
+   ================================================== */
 
-    #checkButton {
-        width: 180px;
-        height: 750px;
-        font-size: 42px;
-    }
-
-    #secondButton {
-        width: 300px;
-        min-height: 160px;
-
-        right: 50px;
-        bottom: 50px;
-
-        font-size: 28px;
-    }
-}
-
-/* =========================
-   ТЕЛЕФОН
-   ========================= */
-
-@media screen and (max-width: 767px) {
-
-    .container {
-        padding-top: 35px;
-        min-height: 100vh;
-        position: relative;
-    }
-
-    h1 {
-        width: 90%;
-        font-size: 28px;
-        margin-bottom: 40px;
-        text-align: center;
-    }
-
-    #nameInput {
-        width: 75%;
-        max-width: 330px;
-        height: 70px;
-        font-size: 24px;
-    }
-
-    /* ПРОВЕРИТЬ — слева */
-
-    #checkButton {
-        position: absolute;
-
-        left: 0;
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        width: 60px;
-        height: 260px;
-
-        font-size: 22px;
-
-        writing-mode: vertical-rl;
-        text-orientation: upright;
-    }
-
-    /* TELEGRAM — не залезает на ПРОВЕРИТЬ */
-
-    #telegramButton {
-        width: calc(100% - 110px);
-
-        margin-top: 25px;
-        margin-left: 90px;
-        margin-right: 20px;
-
-        padding: 18px 10px;
-
-        font-size: 20px;
-        border-radius: 14px;
-    }
-
-    /* СВИНКА — справа снизу */
-
-    #secondButton {
-        position: absolute;
-
-        right: 15px;
-        bottom: 20px;
-
-        width: 150px;
-        min-height: 80px;
-
-        padding: 12px 10px;
-
-        font-size: 18px;
-        line-height: 1.2;
-    }
-
-    /* ОКНО РЕЗУЛЬТАТА */
-
-    .modalContent {
-        width: 90vw;
-    }
-
-    .resultImages img {
-        width: 90vw;
-        height: auto;
-        max-height: 80vh;
-    }
-}
 #sendPersonButton {
     display: none;
 
     margin: 20px auto 0;
-
     padding: 14px 30px;
 
     background: #a64f73;
@@ -387,64 +278,41 @@ h1 {
 
     cursor: pointer;
 
-    transition: transform 0.2s, background 0.2s;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 #sendPersonButton:hover {
     transform: scale(1.05);
     background: #b85b80;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 #sendPersonButton:active {
     transform: scale(0.97);
 }
 
-/* Телефон */
 
-@media screen and (max-width: 767px) {
-
-    #sendPersonButton {
-        width: 85%;
-        max-width: 350px;
-
-        margin-top: 15px;
-
-        padding: 17px 12px;
-
-        font-size: 19px;
-        line-height: 1.2;
-
-        border-radius: 14px;
-    }
-}
-/* =========================
+/* ==================================================
    FUCK АНИМАЦИЯ
-   ========================= */
+   ================================================== */
 
-.resultImages {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Основные картинки */
 .resultImages > img:not(#fuckImage) {
     position: relative;
     z-index: 1;
 }
 
-/* FUCK поверх основной картинки */
 #fuckImage {
     position: absolute;
 
-    /* Насколько залезает на фотку */
     top: 55%;
     left: 50%;
 
     width: min(55vw, 280px);
     max-width: 60%;
+
     height: auto;
 
     transform: translate(-50%, -50%);
@@ -454,60 +322,48 @@ h1 {
     margin: 0;
 
     object-fit: contain;
+
     pointer-events: none;
 
     animation: fuckAnimation 1.2s ease-in-out infinite;
 }
+
 @keyframes fuckAnimation {
 
     0% {
-        transform: scale(0.75) rotate(-8deg);
+        transform: translate(-50%, -50%) scale(0.75) rotate(-8deg);
         opacity: 0.5;
     }
 
     25% {
-        transform: scale(1.05) rotate(6deg);
+        transform: translate(-50%, -50%) scale(1.05) rotate(6deg);
         opacity: 1;
     }
 
     50% {
-        transform: scale(1) rotate(-4deg);
+        transform: translate(-50%, -50%) scale(1) rotate(-4deg);
         opacity: 1;
     }
 
     75% {
-        transform: scale(1.08) rotate(5deg);
+        transform: translate(-50%, -50%) scale(1.08) rotate(5deg);
         opacity: 1;
     }
 
     100% {
-        transform: scale(0.75) rotate(-8deg);
+        transform: translate(-50%, -50%) scale(0.75) rotate(-8deg);
         opacity: 0.5;
     }
 }
 
-/* =========================
-   ТЕЛЕФОН
-   ========================= */
 
-@media screen and (max-width: 600px) {
-
-    #fuckImage {
-        width: min(55vw, 220px);
-        max-width: 65%;
-
-        top: 55%;
-        left: 50%;
-
-        animation-duration: 1s;
-    }
-}
-/* =========================
-   МУРИНО FM
-   ========================= */
+/* ==================================================
+   МУРИНО FM — ПК
+   ================================================== */
 
 #musicPlayer {
     position: fixed;
+
     top: 20px;
     right: 20px;
 
@@ -516,19 +372,22 @@ h1 {
 
     padding: 10px 16px;
 
-    box-sizing: border-box;
-
     display: flex;
     align-items: center;
+
     gap: 14px;
 
     background: #a64f73;
+
     border-radius: 40px;
 
     z-index: 10000;
 }
 
-/* ДЛИННЫЙ ПОЛЗУНОК СЛЕВА */
+
+/* ==================================================
+   ГРОМКОСТЬ — ПК
+   ================================================== */
 
 #musicVolume {
     width: 190px;
@@ -540,13 +399,12 @@ h1 {
     -webkit-appearance: none;
 
     background: #2b2525;
+
     border-radius: 10px;
 
     outline: none;
     cursor: pointer;
 }
-
-/* КРУЖОК ПОЛЗУНКА */
 
 #musicVolume::-webkit-slider-thumb {
     appearance: none;
@@ -559,6 +417,7 @@ h1 {
 
     background-color: #f5e5e9;
     background-image: url("images/music-avatar.png");
+
     background-size: cover;
     background-position: center;
 
@@ -575,6 +434,7 @@ h1 {
 
     background-color: #f5e5e9;
     background-image: url("images/music-avatar.png");
+
     background-size: cover;
     background-position: center;
 
@@ -583,13 +443,21 @@ h1 {
     cursor: pointer;
 }
 
-/* PLAY / PAUSE */
+
+/* ==================================================
+   PLAY / PAUSE — ПК
+   ================================================== */
 
 #musicPlayButton {
     width: 58px;
     height: 58px;
 
+    min-width: 58px;
+    min-height: 58px;
+
     flex-shrink: 0;
+
+    padding: 0;
 
     border: none;
     border-radius: 50%;
@@ -605,6 +473,10 @@ h1 {
     transition: transform 0.15s ease;
 }
 
+#musicPlayButton:hover {
+    transform: scale(1.05);
+}
+
 #musicPlayButton:active {
     transform: scale(0.9);
 }
@@ -612,10 +484,14 @@ h1 {
 #musicPlayIcon {
     font-size: 30px;
     line-height: 1;
+
     color: #000;
 }
 
-/* НАЗВАНИЕ */
+
+/* ==================================================
+   НАЗВАНИЕ МУЗЫКИ
+   ================================================== */
 
 #musicTitle {
     font-size: 25px;
@@ -624,66 +500,781 @@ h1 {
     color: #000;
 
     white-space: nowrap;
+
     transform: translateX(-10px);
 }
 
+
+/* ==================================================
+   RESULT TEXT
+   ================================================== */
+
 #resultText {
     font-size: clamp(60px, 15vw, 220px);
+
     font-weight: 900;
+
     color: #000;
+
     text-align: center;
+
     line-height: 1;
+
     width: 100%;
+
     margin: 20px 0;
 }
-@media screen and (max-width: 600px) {
-    #resultText {
-        font-size: clamp(55px, 20vw, 130px);
-        font-weight: 900;
-        line-height: 0.95;
-    }
-}
-/* ОГРОМНЫЙ ЕБЛАН */
+
+
+/* ==================================================
+   ОГРОМНЫЙ ЕБЛАН
+   ================================================== */
+
 #resultText.eblanText {
     color: #000 !important;
+
     font-size: clamp(70px, 18vw, 250px) !important;
+
     font-weight: 900 !important;
+
     line-height: 0.9 !important;
+
     text-align: center !important;
+
     width: 100% !important;
+
     margin: 20px 0 !important;
+
     padding: 0 !important;
+
     text-shadow: none !important;
 }
-@media screen and (max-width: 600px) {
 
-    #resultText.eblanText {
 
-        font-size: clamp(55px, 22vw, 140px) !important;
-        line-height: 0.9 !important;
+/* ==================================================
+   ЛИДЕРЫ — КНОПКА
+   ================================================== */
 
+.leaders-button {
+    position: relative;
+
+    width: 250px;
+    height: 70px;
+
+    background: #b45b7d;
+    color: white;
+
+    border: none;
+    border-radius: 40px;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    margin-top: 25px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.leaders-button:hover {
+    transform: scale(1.05);
+
+    background: #c56b8f;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.leaders-button:active {
+    transform: scale(0.97);
+}
+
+
+/* ==================================================
+   КОРОНА НА КНОПКЕ ЛИДЕРОВ
+   ================================================== */
+
+.leaders-button::before {
+    content: "👑";
+
+    position: absolute;
+
+    left: -35px;
+    top: -35px;
+
+    font-size: 55px;
+
+    animation: crownButton 1.5s ease-in-out infinite;
+}
+
+@keyframes crownButton {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
     }
 
+    50% {
+        transform: rotate(5deg) translateY(-4px);
+    }
 }
-/* ================================================= */
-/* МОБИЛЬНЫЙ ДИЗАЙН МУЗЫКИ */
-/* ================================================= */
 
-@media screen and (max-width: 600px) {
 
-    /*
-     * Громкость визуально выносится из плашки.
-     * HTML менять не нужно — position: fixed делает её
-     * отдельным элементом на экране.
-     */
+/* ==================================================
+   ОКНО ЛИДЕРОВ
+   ================================================== */
+
+.leaders-modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+
+    z-index: 99999;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* ==================================================
+   ПАНЕЛЬ ЛИДЕРОВ
+   ================================================== */
+
+.leaders-panel {
+    width: 460px;
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: linear-gradient(
+        145deg,
+        #ffe6ef,
+        #ffd1df
+    );
+
+    border: 8px solid #b15c82;
+
+    border-radius: 35px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        inset 0 0 30px rgba(255, 255, 255, 0.5);
+
+    animation: leaderboardOpen 0.35s ease;
+}
+
+@keyframes leaderboardOpen {
+
+    from {
+        transform: scale(0.75) translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* ==================================================
+   КОРОНА В ОКНЕ
+   ================================================== */
+
+.crown {
+    font-size: 70px;
+
+    line-height: 1;
+
+    animation: crownFloat 1.5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes crownFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+}
+
+
+/* ==================================================
+   ЗАГОЛОВОК ЛИДЕРОВ
+   ================================================== */
+
+.leaders-panel h2 {
+    margin: 10px 0 25px;
+
+    font-size: 32px;
+
+    line-height: 1;
+
+    font-weight: 1000;
+
+    color: #111;
+
+    text-transform: uppercase;
+}
+
+
+/* ==================================================
+   СПИСОК ЛИДЕРОВ
+   ================================================== */
+
+.leaders-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* ==================================================
+   СТРОКА ЛИДЕРА
+   ================================================== */
+
+.leader-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 55px;
+
+    padding: 10px 18px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border: 3px solid rgba(0, 0, 0, 0.12);
+
+    border-radius: 18px;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    color: #111;
+
+    box-shadow:
+        0 5px 10px rgba(0, 0, 0, 0.12);
+
+    animation: leaderAppear 0.35s ease both;
+}
+
+@keyframes leaderAppear {
+
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* ==================================================
+   ЧИСЛО ПОСЫЛАНИЙ
+   ================================================== */
+
+.leader-row span:last-child {
+    background: #b15c82;
+
+    color: white;
+
+    padding: 5px 13px;
+
+    border-radius: 15px;
+
+    min-width: 55px;
+
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==================================================
+   1 МЕСТО
+   ================================================== */
+
+.leader-row:nth-child(1) {
+    min-height: 75px;
+
+    background: linear-gradient(
+        135deg,
+        #fff3a6,
+        #ffd447
+    );
+
+    border-color: #d5a900;
+
+    font-size: 27px;
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0 7px 18px rgba(190, 140, 0, 0.4);
+}
+
+.leader-row:nth-child(1)::before {
+    content: "🥇";
+
+    font-size: 32px;
+
+    margin-right: 8px;
+}
+
+
+/* ==================================================
+   2 МЕСТО
+   ================================================== */
+
+.leader-row:nth-child(2) {
+    background: linear-gradient(
+        135deg,
+        #f5f5f5,
+        #cfcfcf
+    );
+
+    border-color: #999;
+
+    font-size: 24px;
+}
+
+.leader-row:nth-child(2)::before {
+    content: "🥈";
+
+    font-size: 28px;
+
+    margin-right: 8px;
+}
+
+
+/* ==================================================
+   3 МЕСТО
+   ================================================== */
+
+.leader-row:nth-child(3) {
+    background: linear-gradient(
+        135deg,
+        #ffd0a3,
+        #d99454
+    );
+
+    border-color: #a9682f;
+
+    font-size: 24px;
+}
+
+.leader-row:nth-child(3)::before {
+    content: "🥉";
+
+    font-size: 28px;
+
+    margin-right: 8px;
+}
+
+
+/* ==================================================
+   ЗАКРЫТЬ ЛИДЕРОВ
+   ================================================== */
+
+#closeLeaders {
+    margin-top: 25px;
+
+    padding: 14px 45px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #b15c82;
+
+    color: white;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 10px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+#closeLeaders:hover {
+    transform: scale(1.07);
+}
+
+#closeLeaders:active {
+    transform: scale(0.95);
+}
+
+
+/* ==================================================
+   ПК
+   ================================================== */
+
+@media screen and (min-width: 768px) {
+
+    #checkButton {
+        width: 180px;
+        height: 750px;
+
+        font-size: 42px;
+    }
+
+    #secondButton {
+        width: 300px;
+        min-height: 160px;
+
+        right: 50px;
+        bottom: 50px;
+
+        font-size: 28px;
+    }
+}
+
+
+/* ==================================================
+   МОБИЛЬНЫЙ ДИЗАЙН
+   ================================================== */
+
+@media screen and (max-width: 767px) {
+
+    .container {
+        min-height: 100vh;
+
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding-top: 105px;
+        padding-bottom: 140px;
+    }
+
+
+    /* ---------- ЗАГОЛОВОК ---------- */
+
+    h1 {
+        width: 90%;
+
+        font-size: 28px;
+
+        line-height: 1.1;
+
+        margin-bottom: 25px;
+
+        text-align: center;
+    }
+
+
+    /* ---------- ВВОД ---------- */
+
+    #nameInput {
+        width: 75%;
+        max-width: 330px;
+
+        height: 70px;
+
+        padding: 0 20px;
+
+        font-size: 24px;
+
+        text-align: center;
+    }
+
+
+    /* ==================================================
+       ПРОВЕРИТЬ — САМАЯ БОЛЬШАЯ
+       ================================================== */
+
+    #checkButton {
+        position: static;
+
+        transform: none;
+
+        width: 88%;
+        max-width: 430px;
+
+        height: 95px;
+
+        margin-top: 22px;
+
+        border: none;
+
+        border-radius: 22px;
+
+        background: #a64f73;
+
+        color: white;
+
+        font-size: 34px;
+
+        font-weight: 900;
+
+        writing-mode: horizontal-tb;
+
+        text-orientation: mixed;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 7px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #checkButton:hover {
+        transform: scale(1.03);
+
+        background: #b85b80;
+
+        box-shadow:
+            0 10px 22px rgba(0, 0, 0, 0.3);
+    }
+
+    #checkButton:active {
+        transform: scale(0.97);
+    }
+
+
+    /* ==================================================
+       ЛИДЕРЫ — ВТОРАЯ ПО РАЗМЕРУ
+       ================================================== */
+
+    .leaders-button {
+        width: 70%;
+        max-width: 320px;
+
+        height: 65px;
+
+        margin-top: 18px;
+
+        font-size: 23px;
+
+        border-radius: 30px;
+    }
+
+    .leaders-button::before {
+        font-size: 40px;
+
+        left: -25px;
+        top: -25px;
+    }
+
+
+    /* ==================================================
+       TELEGRAM — ТРЕТЬЯ КНОПКА
+       ================================================== */
+
+    #telegramButton {
+        width: 60%;
+        max-width: 290px;
+
+        margin: 15px auto 0;
+
+        padding: 15px 10px;
+
+        font-size: 17px;
+
+        border-radius: 14px;
+    }
+
+
+    /* ==================================================
+       СВИНКА
+       ================================================== */
+
+    #secondButton {
+        position: absolute;
+
+        right: 15px;
+        bottom: 20px;
+
+        width: 145px;
+
+        min-height: 75px;
+
+        padding: 10px;
+
+        font-size: 16px;
+
+        line-height: 1.2;
+    }
+
+
+    /* ==================================================
+       КНОПКА ПОСЛАТЬ
+       ================================================== */
+
+    #sendPersonButton {
+        width: 85%;
+        max-width: 350px;
+
+        margin-top: 15px;
+
+        padding: 17px 12px;
+
+        font-size: 19px;
+
+        line-height: 1.2;
+
+        border-radius: 14px;
+    }
+
+
+    /* ==================================================
+       РЕЗУЛЬТАТ
+       ================================================== */
+
+    .modalContent {
+        width: 90vw;
+    }
+
+    .resultImages img {
+        width: 90vw;
+
+        height: auto;
+
+        max-height: 80vh;
+    }
+
+
+    /* ==================================================
+       FUCK
+       ================================================== */
+
+    #fuckImage {
+        width: min(55vw, 220px);
+
+        max-width: 65%;
+
+        top: 55%;
+        left: 50%;
+
+        animation-duration: 1s;
+    }
+
+
+    /* ==================================================
+       МУРИНО FM — ТЕЛЕФОН
+       ================================================== */
+
+    #musicPlayer {
+        position: fixed;
+
+        top: 10px;
+        right: 10px;
+
+        width: 145px;
+        height: 42px;
+
+        min-height: 42px;
+
+        padding: 3px 7px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 6px;
+
+        background: #a64f73;
+
+        border-radius: 25px;
+
+        z-index: 10000;
+    }
+
+
+    /* ---------- PLAY ---------- */
+
+    #musicPlayButton {
+        width: 34px;
+        height: 34px;
+
+        min-width: 34px;
+        min-height: 34px;
+
+        padding: 0;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        background: #f5e5e9;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #musicPlayIcon {
+        font-size: 18px;
+
+        line-height: 1;
+
+        color: #000;
+    }
+
+
+    /* ---------- НАЗВАНИЕ ---------- */
+
+    #musicTitle {
+        font-size: 12px;
+
+        font-weight: bold;
+
+        white-space: nowrap;
+
+        transform: none;
+
+        margin: 0;
+
+        color: #000;
+    }
+
+
+    /* ==================================================
+       ГРОМКОСТЬ — ТЕЛЕФОН
+       ================================================== */
+
     #musicVolume {
         position: fixed;
 
         top: 18px;
         left: 12px;
 
-        width: 120px;
-        height: 6px;
+        width: 105px;
+        height: 5px;
 
         margin: 0;
         padding: 0;
@@ -694,396 +1285,138 @@ h1 {
         -webkit-appearance: none;
 
         background: #2b2525;
+
         border-radius: 10px;
 
         outline: none;
-        cursor: pointer;
     }
 
     #musicVolume::-webkit-slider-thumb {
         appearance: none;
         -webkit-appearance: none;
 
-        width: 34px;
-        height: 34px;
+        width: 28px;
+        height: 28px;
 
         border-radius: 50%;
 
         background-color: #f5e5e9;
+
         background-image: url("images/music-avatar.png");
+
         background-size: cover;
         background-position: center;
 
-        border: 3px solid #f5e5e9;
+        border: 2px solid #f5e5e9;
 
         cursor: pointer;
     }
 
     #musicVolume::-moz-range-thumb {
-        width: 34px;
-        height: 34px;
+        width: 28px;
+        height: 28px;
 
         border-radius: 50%;
 
         background-color: #f5e5e9;
+
         background-image: url("images/music-avatar.png");
+
         background-size: cover;
         background-position: center;
 
-        border: 3px solid #f5e5e9;
+        border: 2px solid #f5e5e9;
 
         cursor: pointer;
     }
 
-    /*
-     * Отдельная маленькая плашка Мурино FM
-     */
-    #musicPlayer {
-        position: fixed;
 
-        top: 46px;
-        right: 10px;
+    /* ==================================================
+       ЕБЛАН — ТЕЛЕФОН
+       ================================================== */
 
-        width: 185px;
-        height: 48px;
-        min-height: 48px;
+    #resultText {
+        font-size: clamp(55px, 20vw, 130px);
 
-        padding: 4px 8px;
+        font-weight: 900;
 
-        box-sizing: border-box;
+        line-height: 0.95;
+    }
 
-        display: flex;
-        align-items: center;
+    #resultText.eblanText {
+        font-size: clamp(55px, 22vw, 140px) !important;
 
-        gap: 7px;
+        line-height: 0.9 !important;
+    }
 
-        background: #a64f73;
+
+    /* ==================================================
+       ЛИДЕРЫ — ОКНО НА ТЕЛЕФОНЕ
+       ================================================== */
+
+    .leaders-modal {
+        padding: 15px;
+    }
+
+    .leaders-panel {
+        width: 90%;
+
+        border-width: 6px;
+
         border-radius: 28px;
 
-        z-index: 10000;
+        padding: 18px;
+    }
+
+    .crown {
+        font-size: 55px;
+    }
+
+    .leaders-panel h2 {
+        font-size: 25px;
+    }
+
+    .leader-row {
+        min-height: 48px;
+
+        padding: 8px 12px;
+
+        font-size: 18px;
+
+        border-radius: 14px;
+    }
+
+    .leader-row:nth-child(1) {
+        min-height: 62px;
+
+        font-size: 22px;
+    }
+
+    .leader-row:nth-child(2),
+    .leader-row:nth-child(3) {
+        font-size: 20px;
+    }
+
+    .leader-row span:last-child {
+        min-width: 45px;
+
+        padding: 4px 9px;
+    }
+
+    #closeLeaders {
+        width: 80%;
+
+        padding: 13px 20px;
+
+        font-size: 19px;
+    }
+}
+@media (max-width: 600px) {
+    button {
+        border-radius: 12px;
     }
 
     #musicPlayButton {
-        width: 40px;
-        height: 40px;
-
-        min-width: 40px;
-        min-height: 40px;
-
-        padding: 0;
-
-        border: none;
         border-radius: 50%;
-
-        background: #f5e5e9;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        flex-shrink: 0;
-
-        cursor: pointer;
     }
-
-    #musicPlayIcon {
-        font-size: 21px;
-        line-height: 1;
-        color: #000;
-    }
-
-    #musicTitle {
-        font-size: 15px;
-        font-weight: bold;
-
-        color: #000;
-
-        white-space: nowrap;
-        transform: none;
-        margin: 0;
-    }
-}
-
-
-@media(max-width:600px){
-
-
-    .leaders-button {
-
-
-        font-size:22px;
-
-
-        padding:12px 40px;
-
-
-        border-radius:25px;
-
-
-    }
-
-
-
-    .leaders-button::before {
-
-
-        font-size:40px;
-
-
-        left:-25px;
-
-        top:-25px;
-
-
-    }
-
-
-
-    .leaders-panel {
-
-
-        width:85%;
-
-
-        border-width:7px;
-
-
-        border-radius:25px;
-
-
-        padding:18px;
-
-
-    }
-
-
-
-    .leaders-panel h2 {
-
-
-        font-size:25px;
-
-
-    }
-
-
-
-    .leader-row {
-
-
-        font-size:19px;
-
-
-        padding-bottom:8px;
-
-    }
-
-
-
-    .crown {
-
-
-        font-size:50px;
-
-
-        left:-25px;
-
-        top:-35px;
-
-    }
-
-
-}
-/* ===== ЛИДЕРЫ ===== */
-.leaders-button {
-    position: relative;
-}
-.leaders-button {
-    position: relative;
-}
-
-
-.leaders-button::before {
-
-    content: "👑";
-    position: absolute;
-    left: -35px;
-    top: -35px;
-    font-size: 55px;
-
-}
-
-.leaders-button::before {
-
-    content: "👑";
-    position: absolute;
-    left: -35px;
-    top: -35px;
-    font-size: 55px;
-
-}
-
-
-.leaders-button {
-    width: 250px;
-    height: 70px;
-    background: #b45b7d;
-    color: white;
-    border: none;
-    border-radius: 40px;
-    font-size: 30px;
-    cursor: pointer;
-    margin-top: 25px;
-}
-
-
-.leaders-button:hover{
-
-    transform:scale(1.05);
-
-}
-
-
-
-.leaders-modal{
-
-
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,0.5);
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:99999;
-
-
-}
-
-
-
-.leaders-panel{
-
-
-    width:420px;
-
-    background:#ffe5ec;
-
-    border:10px solid #b15c82;
-
-    border-radius:35px;
-
-    padding:25px;
-
-    text-align:center;
-
-
-}
-
-
-
-.leaders-panel h2{
-
-    font-size:35px;
-
-    font-weight:900;
-
-    color:black;
-
-}
-
-
-
-.leader-row{
-
-
-    display:flex;
-
-    justify-content:space-between;
-
-    border-bottom:3px solid black;
-
-    padding:12px;
-
-    font-size:25px;
-
-    font-weight:bold;
-
-
-}
-
-
-
-#closeLeaders{
-
-
-    margin-top:30px;
-
-    padding:15px 50px;
-
-    border:none;
-
-    border-radius:30px;
-
-    background:#b15c82;
-
-    color:white;
-
-    font-size:22px;
-
-
-}
-
-
-
-@media(max-width:600px){
-
-
-.leaders-button{
-
-    font-size:22px;
-
-    padding:15px 45px;
-
-}
-
-
-
-.leaders-panel{
-
-    width:80%;
-
-}
-
-
-.leaders-panel h2{
-
-    font-size:25px;
-
-}
-
-
-.leader-row{
-
-    font-size:18px;
-
-}
-@media(max-width:600px){
-
-    .leaders-button::before {
-
-        font-size:40px;
-        left:-25px;
-        top:-25px;
-
-    }
-
-}
-
-
 }
